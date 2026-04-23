@@ -42,14 +42,6 @@ bash scripts/setup.sh
 python -m pip install -e .
 ```
 
-### 默认音色
-
-当前默认音色已经内置在仓库中：
-
-- Prompt 音频：[prompt.wav](./assets/default_prompt/prompt.wav)
-- Prompt 文本：[prompt.txt](./assets/default_prompt/prompt.txt)
-- Prompt 时序轨：[prompt_track.json](./assets/default_prompt/prompt_track.json)
-
 ### 复现 demo 页样本
 
 ```bash
@@ -77,6 +69,16 @@ python inference/run_magictts.py \
   --output-dir outputs/my_spontaneous_demo
 ```
 
+英文也可以直接省略 prompt 参数，自动回退到仓库内置英文参考音色：
+
+```bash
+python inference/run_magictts.py \
+  --language en \
+  --target-text "After the meeting, please review the budget." \
+  --checkpoint /path/to/magictts_36k.pt \
+  --output-dir outputs/my_english_spontaneous_demo
+```
+
 如果 `target_text` 带控制标记，模型会自动进入 controlled 模式。这里同样可以不提供 `--prompt-audio` 和 `--prompt-text`。
 
 ```bash
@@ -91,8 +93,10 @@ python inference/run_magictts.py \
 - `字{300}` 表示该字符目标时长为 `300 ms`
 - `[260]` 表示在当前位置插入一个 `260 ms` 停顿
 - 未标注的内容字默认使用 `170 ms`
+- 英文 controlled 模式下，`word{T}` 会把该单词总时长 `T` 均分到各个字母；未标注英文内容默认按每个字母 `55 ms` 计算，因此总时长默认约为“字母数 × 55 ms”
 
-### 用完整时序轨文件合成
+<details>
+<summary>用完整时序轨文件合成</summary>
 
 仓库里提供了一份可直接参考的完整时序轨：
 
@@ -107,7 +111,10 @@ python inference/run_edit_from_json.py \
   --output-dir outputs/release_manual_demo
 ```
 
-### 单独准备 prompt-side duration
+</details>
+
+<details>
+<summary>单独准备 prompt-side duration</summary>
 
 ```bash
 python inference/align_prompt_with_mfa.py \
@@ -122,6 +129,8 @@ python inference/align_prompt_with_mfa.py \
 - `prompt_alignment_raw.json`
 - `prompt_alignment_debug.json`
 - `prompt_track.json`
+
+</details>
 
 ### 致谢
 
@@ -176,12 +185,6 @@ If you already manage your own Torch environment, you can directly run:
 python -m pip install -e .
 ```
 
-### Built-In Default Prompt
-
-- Prompt audio: [prompt.wav](./assets/default_prompt/prompt.wav)
-- Prompt transcript: [prompt.txt](./assets/default_prompt/prompt.txt)
-- Prompt timing track: [prompt_track.json](./assets/default_prompt/prompt_track.json)
-
 ### Reproduce The Demo-Page Samples
 
 ```bash
@@ -209,6 +212,16 @@ python inference/run_magictts.py \
   --output-dir outputs/my_spontaneous_demo
 ```
 
+For English synthesis, you can also omit the prompt arguments and use the built-in English reference prompt:
+
+```bash
+python inference/run_magictts.py \
+  --language en \
+  --target-text "After the meeting, please review the budget." \
+  --checkpoint /path/to/magictts_36k.pt \
+  --output-dir outputs/my_english_spontaneous_demo
+```
+
 If `target_text` contains control markers, the model automatically runs in controlled mode. `--prompt-audio` and `--prompt-text` are also optional here.
 
 ```bash
@@ -223,8 +236,10 @@ Inline control markers are written directly inside `target_text`:
 - `char{300}` sets that character to `300 ms`
 - `[260]` inserts a `260 ms` pause at that position
 - unmarked content characters use the default `170 ms`
+- in English controlled mode, `word{T}` treats `T` as the total duration of that word and distributes it evenly across its letters; unmarked English content defaults to `55 ms` per letter, so the default total is roughly `number_of_letters × 55 ms`
 
-### Synthesize From A Full Timing Track
+<details>
+<summary>Synthesize From A Full Timing Track</summary>
 
 You can reference the example timing track included in the repository:
 
@@ -239,7 +254,10 @@ python inference/run_edit_from_json.py \
   --output-dir outputs/release_manual_demo
 ```
 
-### Prepare Prompt-Side Duration Only
+</details>
+
+<details>
+<summary>Prepare Prompt-Side Duration Only</summary>
 
 ```bash
 python inference/align_prompt_with_mfa.py \
@@ -254,6 +272,8 @@ After the script finishes, `outputs/prompt_alignment` will contain:
 - `prompt_alignment_raw.json`
 - `prompt_alignment_debug.json`
 - `prompt_track.json`
+
+</details>
 
 ### Acknowledgement
 
