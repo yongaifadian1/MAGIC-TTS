@@ -25,7 +25,6 @@
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://github.com/yongaifadian1/MAGIC-TTS">Repository</a>
-            <a class="button" href="./README.md">README</a>
           </div>
         </div>
         <aside class="hero-side">
@@ -80,8 +79,8 @@
           </article>
           <article class="overview-card">
             <h3>Spontaneous</h3>
-            <p class="lang zh active">不提供显式 target-side duration，由模型自行决定节奏。</p>
-            <p class="lang en">No explicit target-side duration is provided and the model predicts timing on its own.</p>
+            <p class="lang zh active">单独集中展示，不混在可控版本对比里，用来展示自发 duration 建模能力。</p>
+            <p class="lang en">Shown in a separate section instead of mixing into controlled comparisons, to highlight spontaneous duration modeling.</p>
           </article>
         </div>
       </section>
@@ -106,7 +105,7 @@
             <p class="scene-goal lang zh active">目标：动作词需要被稳定听清，单靠自然合成不够。</p>
             <p class="scene-goal lang en">Goal: the action phrase should remain clearly audible instead of being left entirely to natural timing.</p>
           </div>
-          <div class="audio-grid">
+          <div class="audio-grid audio-grid-controlled">
             <section class="audio-card">
               <h4>v1 Baseline</h4>
               <p class="lang zh active">所有内容字统一设为 170 ms。</p>
@@ -125,12 +124,6 @@
               <p class="lang en">Keep the 260 ms pause and stretch “左 / 转” to 300 ms.</p>
               <audio controls preload="none" src="./outputs/controlled_demos/default_voice/01_navigation_turn/01_navigation_turn/v3_pause_plus_char_turn/gen_target_only.wav"></audio>
             </section>
-            <section class="audio-card spontaneous">
-              <h4>Spontaneous</h4>
-              <p class="lang zh active">不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
-              <p class="lang en">No explicit duration is provided and MAGIC-TTS decides the rhythm on its own.</p>
-              <audio controls preload="none" src="./outputs/spontaneous_demos/01_navigation_turn/spontaneous/gen_target_only.wav"></audio>
-            </section>
           </div>
         </article>
 
@@ -145,7 +138,7 @@
             <p class="scene-goal lang zh active">目标：教学场景里，目标词音节需要被明确拉出来。</p>
             <p class="scene-goal lang en">Goal: the target word should be clearly stretched in a guided-reading setting.</p>
           </div>
-          <div class="audio-grid">
+          <div class="audio-grid audio-grid-controlled">
             <section class="audio-card">
               <h4>v1 Baseline</h4>
               <p class="lang zh active">所有内容字统一设为 170 ms。</p>
@@ -164,12 +157,6 @@
               <p class="lang en">Keep the 260 ms pause and stretch “苹 / 果” to 300 ms.</p>
               <audio controls preload="none" src="./outputs/controlled_demos/default_voice/02_kids_reading/02_kids_reading/v3_pause_plus_char_syllable/gen_target_only.wav"></audio>
             </section>
-            <section class="audio-card spontaneous">
-              <h4>Spontaneous</h4>
-              <p class="lang zh active">不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
-              <p class="lang en">No explicit duration is provided and MAGIC-TTS decides the rhythm on its own.</p>
-              <audio controls preload="none" src="./outputs/spontaneous_demos/02_kids_reading/spontaneous/gen_target_only.wav"></audio>
-            </section>
           </div>
         </article>
 
@@ -184,7 +171,7 @@
             <p class="scene-goal lang zh active">目标：数字串播报必须控制分组和重点数字时长。</p>
             <p class="scene-goal lang en">Goal: grouped digits and key numbers should be controlled explicitly rather than left to fluency alone.</p>
           </div>
-          <div class="audio-grid">
+          <div class="audio-grid audio-grid-controlled">
             <section class="audio-card">
               <h4>v1 Baseline</h4>
               <p class="lang zh active">所有内容字统一设为 170 ms。</p>
@@ -203,12 +190,6 @@
               <p class="lang en">Keep the 260 ms pause and stretch all six digits to 300 ms.</p>
               <audio controls preload="none" src="./outputs/controlled_demos/default_voice/03_accessibility_code/03_accessibility_code/v3_pause_plus_char_digits/gen_target_only.wav"></audio>
             </section>
-            <section class="audio-card spontaneous">
-              <h4>Spontaneous</h4>
-              <p class="lang zh active">不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
-              <p class="lang en">No explicit duration is provided and MAGIC-TTS decides the rhythm on its own.</p>
-              <audio controls preload="none" src="./outputs/spontaneous_demos/03_accessibility_code/spontaneous/gen_target_only.wav"></audio>
-            </section>
           </div>
         </article>
 
@@ -223,7 +204,7 @@
             <p class="scene-goal lang zh active">目标：站名前缀和站名本体需要分离，站名本体要被突出。</p>
             <p class="scene-goal lang en">Goal: the station prefix and station name should be separated, and the station name should be emphasized.</p>
           </div>
-          <div class="audio-grid">
+          <div class="audio-grid audio-grid-controlled">
             <section class="audio-card">
               <h4>v1 Baseline</h4>
               <p class="lang zh active">所有内容字统一设为 170 ms。</p>
@@ -242,14 +223,48 @@
               <p class="lang en">Keep the 260 ms pause and stretch “五 / 山 / 站” to 300 ms.</p>
               <audio controls preload="none" src="./outputs/controlled_demos/default_voice/04_station_wushanzhan/04_station_wushanzhan/v3_pause_plus_char_station_name/gen_target_only.wav"></audio>
             </section>
-            <section class="audio-card spontaneous">
-              <h4>Spontaneous</h4>
-              <p class="lang zh active">不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
-              <p class="lang en">No explicit duration is provided and MAGIC-TTS decides the rhythm on its own.</p>
-              <audio controls preload="none" src="./outputs/spontaneous_demos/04_station_wushanzhan/spontaneous/gen_target_only.wav"></audio>
-            </section>
           </div>
         </article>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Spontaneous Duration Modeling</p>
+            <h2 class="lang zh active">自发 Duration 建模 Demo</h2>
+            <h2 class="lang en">Spontaneous Duration Modeling Demos</h2>
+          </div>
+        </div>
+        <div class="audio-grid spontaneous-grid">
+          <section class="audio-card spontaneous">
+            <h4 class="lang zh active">导航转向</h4>
+            <h4 class="lang en">Navigation Turn</h4>
+            <p class="lang zh active">不提供任何 target-side 显式时长，模型自行建模节奏。</p>
+            <p class="lang en">No explicit target-side duration is provided; the model predicts timing on its own.</p>
+            <audio controls preload="none" src="./outputs/spontaneous_demos/01_navigation_turn/spontaneous/gen_target_only.wav"></audio>
+          </section>
+          <section class="audio-card spontaneous">
+            <h4 class="lang zh active">儿童跟读</h4>
+            <h4 class="lang en">Kids Reading</h4>
+            <p class="lang zh active">不提供任何 target-side 显式时长，模型自行建模节奏。</p>
+            <p class="lang en">No explicit target-side duration is provided; the model predicts timing on its own.</p>
+            <audio controls preload="none" src="./outputs/spontaneous_demos/02_kids_reading/spontaneous/gen_target_only.wav"></audio>
+          </section>
+          <section class="audio-card spontaneous">
+            <h4 class="lang zh active">验证码播报</h4>
+            <h4 class="lang en">Accessibility Code</h4>
+            <p class="lang zh active">不提供任何 target-side 显式时长，模型自行建模节奏。</p>
+            <p class="lang en">No explicit target-side duration is provided; the model predicts timing on its own.</p>
+            <audio controls preload="none" src="./outputs/spontaneous_demos/03_accessibility_code/spontaneous/gen_target_only.wav"></audio>
+          </section>
+          <section class="audio-card spontaneous">
+            <h4 class="lang zh active">站点播报</h4>
+            <h4 class="lang en">Station Arrival</h4>
+            <p class="lang zh active">不提供任何 target-side 显式时长，模型自行建模节奏。</p>
+            <p class="lang en">No explicit target-side duration is provided; the model predicts timing on its own.</p>
+            <audio controls preload="none" src="./outputs/spontaneous_demos/04_station_wushanzhan/spontaneous/gen_target_only.wav"></audio>
+          </section>
+        </div>
       </section>
     </div>
 
