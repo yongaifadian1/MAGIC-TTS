@@ -40,15 +40,13 @@ bash scripts/setup.sh
 
 你仍需要从 Hugging Face 下载 MAGIC-TTS checkpoint，并放到 `checkpoints/`，例如 `checkpoints/magictts_36k.pt`。
 
-</details>
-
-### 安装为本地包
-
 如果你已经自己准备好了 Torch 环境，也可以直接：
 
 ```bash
 python -m pip install -e .
 ```
+
+</details>
 
 ### 复现 demo 页样本
 
@@ -188,15 +186,13 @@ bash scripts/setup.sh
 
 You still need to download the MAGIC-TTS checkpoint from Hugging Face and place it under `checkpoints/`, for example `checkpoints/magictts_36k.pt`.
 
-</details>
-
-### Install As A Local Package
-
 If you already manage your own Torch environment, you can directly run:
 
 ```bash
 python -m pip install -e .
 ```
+
+</details>
 
 ### Reproduce The Demo-Page Samples
 
