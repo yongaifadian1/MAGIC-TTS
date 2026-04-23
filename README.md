@@ -9,6 +9,7 @@
 ## 中文
 
 - 在线 Demo: https://yongaifadian1.github.io/MAGIC-TTS/
+- Hugging Face: https://huggingface.co/maimai11/MAGIC-TTS
 
 MAGIC-TTS 是一个支持细粒度局部时序控制的语音合成系统。它既可以对指定 token 的内容时长和停顿进行毫秒级控制，也可以在不提供任何显式时长的情况下自然生成语音。
 
@@ -133,6 +134,7 @@ MAGIC-TTS 使用了 F5-TTS 提供的 backbone 实现，并以其公开 checkpoin
 ## English
 
 - Online demo: https://yongaifadian1.github.io/MAGIC-TTS/
+- Hugging Face: https://huggingface.co/maimai11/MAGIC-TTS
 
 MAGIC-TTS is a speech synthesis system with explicit fine-grained local timing control. It supports millisecond-level control over selected token durations and pauses, and it can also generate speech naturally without any explicit duration input.
 
