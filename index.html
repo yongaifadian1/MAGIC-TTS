@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAGIC-TTS Demo</title>
+    <meta
+      name="description"
+      content="MAGIC-TTS demo page for fine-grained controllable speech synthesis with explicit local duration and pause control."
+    >
+    <link rel="stylesheet" href="./site.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">MAGIC-TTS</p>
+          <h1>细粒度时序可控语音合成 Demo</h1>
+          <p class="hero-text">
+            同一条默认音色在四个实用场景下，分别展示 baseline、只加关键停顿、停顿加局部内容拉长，以及 spontaneous
+            生成的对比效果。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="./README.md">README</a>
+            <a class="button" href="./DEMO.md">Markdown Notes</a>
+            <a class="button" href="https://github.com/yongaifadian1/MAGIC-TTS">GitHub Repo</a>
+          </div>
+        </div>
+        <div class="hero-side">
+          <img class="logo" src="./logo.png" alt="MAGIC-TTS logo">
+          <div class="meta-card">
+            <p>Modes</p>
+            <strong>controlled / spontaneous</strong>
+          </div>
+          <div class="meta-card">
+            <p>Control Units</p>
+            <strong>token duration / local pause</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="section intro">
+        <div class="section-heading">
+          <p class="eyebrow">Overview</p>
+          <h2>Demo 结构</h2>
+        </div>
+        <div class="overview-grid">
+          <article class="overview-card">
+            <h3>v1</h3>
+            <p>均匀 baseline 时序，所有内容字统一设为 170 ms。</p>
+          </article>
+          <article class="overview-card">
+            <h3>v2</h3>
+            <p>保持内容字 170 ms，只加入关键边界停顿 260 ms。</p>
+          </article>
+          <article class="overview-card">
+            <h3>v3</h3>
+            <p>保留关键停顿，并把重点局部内容 token 拉长到 300 ms。</p>
+          </article>
+          <article class="overview-card">
+            <h3>Spontaneous</h3>
+            <p>不提供任何显式 text duration，由模型自行决定节奏。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Scenes</p>
+          <h2>中文场景试听</h2>
+        </div>
+
+        <article class="scene-card">
+          <div class="scene-header">
+            <div>
+              <p class="scene-tag">Scene 01</p>
+              <h3>导航转向</h3>
+              <p class="scene-text">文本：<code>前方路口，左转。</code></p>
+            </div>
+            <p class="scene-goal">动作词需要被稳定听清，单靠自然合成不够。</p>
+          </div>
+          <div class="audio-grid">
+            <section class="audio-card">
+              <h4>v1 Baseline</h4>
+              <p>所有内容字统一设为 170 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/01_navigation_turn/01_navigation_turn/v1_baseline_eqdur/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v2 Pause Only</h4>
+              <p>保持内容字 170 ms，把动作前逗号停顿设为 260 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/01_navigation_turn/01_navigation_turn/v2_pause_only_boundary/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v3 Pause + Content</h4>
+              <p>保持 260 ms 停顿，并把“左 / 转”拉长到 300 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/01_navigation_turn/01_navigation_turn/v3_pause_plus_char_turn/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card audio-card-accent">
+              <h4>Spontaneous</h4>
+              <p>不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
+              <audio controls preload="none" src="./outputs/spontaneous_demos/01_navigation_turn/spontaneous/gen_target_only.wav"></audio>
+            </section>
+          </div>
+        </article>
+
+        <article class="scene-card">
+          <div class="scene-header">
+            <div>
+              <p class="scene-tag">Scene 02</p>
+              <h3>儿童跟读</h3>
+              <p class="scene-text">文本：<code>请跟我读，苹果。</code></p>
+            </div>
+            <p class="scene-goal">教学场景里，目标词音节需要被明确拉出来。</p>
+          </div>
+          <div class="audio-grid">
+            <section class="audio-card">
+              <h4>v1 Baseline</h4>
+              <p>所有内容字统一设为 170 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/02_kids_reading/02_kids_reading/v1_baseline_eqdur/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v2 Pause Only</h4>
+              <p>目标词前逗号停顿设为 260 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/02_kids_reading/02_kids_reading/v2_pause_only_syllable/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v3 Pause + Content</h4>
+              <p>保持 260 ms 停顿，并把“苹 / 果”拉长到 300 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/02_kids_reading/02_kids_reading/v3_pause_plus_char_syllable/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card audio-card-accent">
+              <h4>Spontaneous</h4>
+              <p>不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
+              <audio controls preload="none" src="./outputs/spontaneous_demos/02_kids_reading/spontaneous/gen_target_only.wav"></audio>
+            </section>
+          </div>
+        </article>
+
+        <article class="scene-card">
+          <div class="scene-header">
+            <div>
+              <p class="scene-tag">Scene 03</p>
+              <h3>验证码播报</h3>
+              <p class="scene-text">文本：<code>验证码是三七九，二一八。</code></p>
+            </div>
+            <p class="scene-goal">数字串播报不能只靠自然度，必须控制分组和重点数字时长。</p>
+          </div>
+          <div class="audio-grid">
+            <section class="audio-card">
+              <h4>v1 Baseline</h4>
+              <p>所有内容字统一设为 170 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/03_accessibility_code/03_accessibility_code/v1_baseline_eqdur/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v2 Pause Only</h4>
+              <p>把 3+3 分组边界处的逗号停顿设为 260 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/03_accessibility_code/03_accessibility_code/v2_pause_only_grouped/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v3 Pause + Content</h4>
+              <p>保持 260 ms 停顿，并把六个数字全部拉长到 300 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/03_accessibility_code/03_accessibility_code/v3_pause_plus_char_digits/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card audio-card-accent">
+              <h4>Spontaneous</h4>
+              <p>不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
+              <audio controls preload="none" src="./outputs/spontaneous_demos/03_accessibility_code/spontaneous/gen_target_only.wav"></audio>
+            </section>
+          </div>
+        </article>
+
+        <article class="scene-card">
+          <div class="scene-header">
+            <div>
+              <p class="scene-tag">Scene 04</p>
+              <h3>站点播报</h3>
+              <p class="scene-text">文本：<code>前方到站，五山站。</code></p>
+            </div>
+            <p class="scene-goal">站名前缀和站名本体需要分开，而且站名本体需要被突出。</p>
+          </div>
+          <div class="audio-grid">
+            <section class="audio-card">
+              <h4>v1 Baseline</h4>
+              <p>所有内容字统一设为 170 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/04_station_wushanzhan/04_station_wushanzhan/v1_baseline_eqdur/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v2 Pause Only</h4>
+              <p>站名前逗号停顿设为 260 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/04_station_wushanzhan/04_station_wushanzhan/v2_pause_only_station_boundary/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>v3 Pause + Content</h4>
+              <p>保持 260 ms 停顿，并把“五 / 山 / 站”拉长到 300 ms。</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/04_station_wushanzhan/04_station_wushanzhan/v3_pause_plus_char_station_name/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card audio-card-accent">
+              <h4>Spontaneous</h4>
+              <p>不提供任何显式时长，由 MAGIC-TTS 自行决定节奏。</p>
+              <audio controls preload="none" src="./outputs/spontaneous_demos/04_station_wushanzhan/spontaneous/gen_target_only.wav"></audio>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="section section-english">
+        <div class="section-heading">
+          <p class="eyebrow">English</p>
+          <h2>Reading Guide</h2>
+        </div>
+        <div class="english-grid">
+          <article class="english-card">
+            <h3>What changes across v1 / v2 / v3?</h3>
+            <p>
+              `v1` is a uniform baseline. `v2` keeps the same content duration but adds a critical pause.
+              `v3` keeps that pause and further stretches the key local tokens.
+            </p>
+          </article>
+          <article class="english-card">
+            <h3>What is spontaneous mode?</h3>
+            <p>
+              No explicit target-side duration is provided. MAGIC-TTS predicts internal duration and pause timing
+              on its own.
+            </p>
+          </article>
+          <article class="english-card">
+            <h3>Included scenes</h3>
+            <p>
+              Navigation turn, kids reading, accessibility code, and station arrival, all spoken with the same
+              default voice.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Example Track</p>
+          <h2>完整时序轨样例</h2>
+        </div>
+        <div class="track-grid">
+          <article class="track-card">
+            <h3>Prompt Audio</h3>
+            <audio controls preload="none" src="./outputs/control_track_example/prompt.wav"></audio>
+          </article>
+          <article class="track-card">
+            <h3>Input Audio</h3>
+            <audio controls preload="none" src="./outputs/control_track_example/input.wav"></audio>
+          </article>
+          <article class="track-card">
+            <h3>Generated Audio</h3>
+            <audio controls preload="none" src="./outputs/control_track_example/gen.wav"></audio>
+          </article>
+          <article class="track-card">
+            <h3>Target-Only Output</h3>
+            <audio controls preload="none" src="./outputs/control_track_example/gen_target_only.wav"></audio>
+          </article>
+        </div>
+        <p class="track-links">
+          附带文件：
+          <a href="./outputs/control_track_example/custom_track.json">custom_track.json</a>
+          <a href="./outputs/control_track_example/prompt_track.json">prompt_track.json</a>
+          <a href="./outputs/control_track_example/prompt_alignment_raw.json">prompt_alignment_raw.json</a>
+        </p>
+      </section>
+    </div>
+  </body>
+</html>
