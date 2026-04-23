@@ -76,24 +76,24 @@
 
 ### 英文展示 1：语义对比纠正
 
-目标：让英文近音词的纠正关系更清楚。
+目标：通过毫秒级停顿和内容时长控制，让英文近音词的纠正关系更清楚。
 
 文本：`I said red notebook, not read notebook.`
 
 - `spontaneous`：不提供任何 target-side 显式时长，由模型自然处理对比  
   [试听](./outputs/spontaneous_demos/05_contrastive_meaning/spontaneous/gen_target_only.wav)
-- `controlled`：将 `red / read` 设成不同时长，并在纠正前加入短停顿  
+- `controlled`：控制文本为 `I said red{420} notebook,[160] not read{620} notebook.`，将 `red` 设为 `420 ms`、`read` 设为 `620 ms`，并在纠正前加入 `160 ms` 停顿  
   [试听](./outputs/controlled_demos/default_voice/05_contrastive_meaning/05_contrastive_meaning/controlled/gen_target_only.wav)
 
 ### 英文展示 2：戏剧化台词
 
-目标：展示英文叙事里的悬念停顿和结尾动作词拉长。
+目标：通过毫秒级停顿和内容时长控制，展示英文叙事里的悬念与戏剧张力。
 
 文本：`She opened the door and whispered, run.`
 
 - `spontaneous`：不提供任何 target-side 显式时长，由模型自然完成整句叙事  
   [试听](./outputs/spontaneous_demos/06_dramatic_line/spontaneous/gen_target_only.wav)
-- `controlled`：在 `run` 前加入短暂停顿，并把结尾动作词拉长  
+- `controlled`：控制文本为 `She opened the door and whispered,[180] run{560}.`，在 `run` 前加入 `180 ms` 停顿，并把 `run` 拉长到 `560 ms`  
   [试听](./outputs/controlled_demos/default_voice/06_dramatic_line/06_dramatic_line/controlled/gen_target_only.wav)
 
 ---
@@ -147,11 +147,11 @@ Text: `前方到站，五山站。`
 Text: `I said red notebook, not read notebook.`
 
 - `spontaneous`: do not provide any text duration, letting MAGIC-TTS handle the contrast naturally [listen](./outputs/spontaneous_demos/05_contrastive_meaning/spontaneous/gen_target_only.wav)
-- `controlled`: assign different durations to `red / read` and insert a short correction pause [listen](./outputs/controlled_demos/default_voice/05_contrastive_meaning/05_contrastive_meaning/controlled/gen_target_only.wav)
+- `controlled`: use `I said red{420} notebook,[160] not read{620} notebook.`, set `red` to `420 ms`, set `read` to `620 ms`, and insert a `160 ms` pause before the correction [listen](./outputs/controlled_demos/default_voice/05_contrastive_meaning/05_contrastive_meaning/controlled/gen_target_only.wav)
 
 ### 6. Dramatic Line
 
 Text: `She opened the door and whispered, run.`
 
 - `spontaneous`: do not provide any text duration, letting MAGIC-TTS narrate the line on its own [listen](./outputs/spontaneous_demos/06_dramatic_line/spontaneous/gen_target_only.wav)
-- `controlled`: insert a short suspense pause before `run` and stretch the final action word [listen](./outputs/controlled_demos/default_voice/06_dramatic_line/06_dramatic_line/controlled/gen_target_only.wav)
+- `controlled`: use `She opened the door and whispered,[180] run{560}.`, insert a `180 ms` pause before `run`, and stretch `run` to `560 ms` [listen](./outputs/controlled_demos/default_voice/06_dramatic_line/06_dramatic_line/controlled/gen_target_only.wav)
