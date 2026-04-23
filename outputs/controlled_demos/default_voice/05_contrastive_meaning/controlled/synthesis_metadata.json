@@ -1,0 +1,18 @@
+{
+  "audio_path": "/public/home/202420164005/code/MAGIC-TTS/assets/default_prompt_en/prompt.mp3",
+  "track_json": "/public/home/202420164005/code/MAGIC-TTS/outputs/english_cards_parallel/06_contrast_controlled/custom_track.json",
+  "output_prefix": "gen",
+  "prompt_seconds": 3.0,
+  "prompt_samples": 79032,
+  "prompt_frames": 308.71875,
+  "edited_total_frames": 554,
+  "preserve_cond_audio_in_output": true,
+  "omit_token_durations": false,
+  "use_target_only_text": false,
+  "target_only_frames": null,
+  "checkpoint_source": "/public/home/202420164005/code/MAGIC-TTS/checkpoints/magictts_36k.pt",
+  "device": "cuda",
+  "steps": 32,
+  "cfg_strength": 2.0,
+  "sway_sampling_coef": -1.0
+}

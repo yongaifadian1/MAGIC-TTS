@@ -18,10 +18,10 @@
           <h1 class="lang zh active">细粒度时序可控语音合成</h1>
           <h1 class="lang en">Fine-Grained Controllable Speech Synthesis</h1>
           <p class="hero-text lang zh active">
-            使用同一条默认音色，在四个实用场景下对比 baseline、关键停顿控制、局部内容拉长与 spontaneous 生成效果。
+            使用同一条默认音色，在四个中文场景和两个英文场景下对比 controlled 与 spontaneous 合成效果。
           </p>
           <p class="hero-text lang en">
-            Compare baseline timing, critical pause control, local content stretching, and spontaneous generation under the same default voice.
+            Compare controlled and spontaneous generation across four Chinese scenes and two English scenes under the same default voice.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://github.com/yongaifadian1/MAGIC-TTS">Repository</a>
@@ -38,7 +38,7 @@
           <div class="stat-card">
             <span class="stat-label lang zh active">场景数</span>
             <span class="stat-label lang en">Scenes</span>
-            <strong>4</strong>
+            <strong>6</strong>
           </div>
           <div class="stat-card">
             <span class="stat-label lang zh active">模式</span>
@@ -190,6 +190,70 @@
               <p class="lang zh active">保留 260 ms 停顿，并把“五 / 山 / 站”拉长到 300 ms。</p>
               <p class="lang en">Keep the 260 ms pause and stretch “五 / 山 / 站” to 300 ms.</p>
               <audio controls preload="none" src="./outputs/controlled_demos/default_voice/04_station_wushanzhan/04_station_wushanzhan/v3_pause_plus_char_station_name/gen_target_only.wav"></audio>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">English Showcase</p>
+            <h2 class="lang zh active">英文展示 Demo</h2>
+            <h2 class="lang en">English Showcase Demos</h2>
+          </div>
+        </div>
+
+        <article class="scene-card">
+          <div class="scene-header">
+            <div>
+              <p class="scene-id">Scene 05</p>
+              <h3 class="lang zh active">语义对比纠正</h3>
+              <h3 class="lang en">Contrastive Meaning</h3>
+              <p class="scene-text"><code>I said red notebook, not read notebook.</code></p>
+            </div>
+            <p class="scene-goal lang zh active">目标：突出英文近音词对比，让纠正关系更清楚，不靠中文式三段递进。</p>
+            <p class="scene-goal lang en">Goal: make the corrective contrast between near-homophones clearer without following the Chinese three-step pattern.</p>
+          </div>
+          <div class="audio-grid audio-grid-duo">
+            <section class="audio-card">
+              <h4>Spontaneous</h4>
+              <p class="lang zh active">不提供显式时长，让模型自然处理 red / read 的对比。</p>
+              <p class="lang en">No explicit duration is provided; the model handles the red/read contrast naturally.</p>
+              <audio controls preload="none" src="./outputs/spontaneous_demos/05_contrastive_meaning/spontaneous/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>Controlled</h4>
+              <p class="lang zh active">把 <code>red</code> 与 <code>read</code> 设成不同时长，并在纠正前加入短停顿。</p>
+              <p class="lang en">Assign different durations to <code>red</code> and <code>read</code>, with a short correction pause before the second phrase.</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/05_contrastive_meaning/05_contrastive_meaning/controlled/gen_target_only.wav"></audio>
+            </section>
+          </div>
+        </article>
+
+        <article class="scene-card">
+          <div class="scene-header">
+            <div>
+              <p class="scene-id">Scene 06</p>
+              <h3 class="lang zh active">戏剧化台词</h3>
+              <h3 class="lang en">Dramatic Line</h3>
+              <p class="scene-text"><code>She opened the door and whispered, run.</code></p>
+            </div>
+            <p class="scene-goal lang zh active">目标：展示英文叙事里悬念停顿和结尾动作词拉长的戏剧效果。</p>
+            <p class="scene-goal lang en">Goal: show suspense timing in English narration through a delayed pause and a stretched final action word.</p>
+          </div>
+          <div class="audio-grid audio-grid-duo">
+            <section class="audio-card">
+              <h4>Spontaneous</h4>
+              <p class="lang zh active">不提供显式时长，让模型自然完成整句叙事。</p>
+              <p class="lang en">No explicit duration is provided; the model narrates the line on its own.</p>
+              <audio controls preload="none" src="./outputs/spontaneous_demos/06_dramatic_line/spontaneous/gen_target_only.wav"></audio>
+            </section>
+            <section class="audio-card">
+              <h4>Controlled</h4>
+              <p class="lang zh active">在 <code>run</code> 前加入短暂停顿，并把结尾动作词拉长。</p>
+              <p class="lang en">Insert a short suspense pause before <code>run</code> and stretch the final action word.</p>
+              <audio controls preload="none" src="./outputs/controlled_demos/default_voice/06_dramatic_line/06_dramatic_line/controlled/gen_target_only.wav"></audio>
             </section>
           </div>
         </article>

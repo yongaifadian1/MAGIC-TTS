@@ -74,6 +74,28 @@
 - `spontaneous` 不提供任何 text duration，由 MAGIC-TTS 自行决定时长  
   [试听](./outputs/spontaneous_demos/04_station_wushanzhan/spontaneous/gen_target_only.wav)
 
+### 英文展示 1：语义对比纠正
+
+目标：让英文近音词的纠正关系更清楚。
+
+文本：`I said red notebook, not read notebook.`
+
+- `spontaneous`：不提供任何 target-side 显式时长，由模型自然处理对比  
+  [试听](./outputs/spontaneous_demos/05_contrastive_meaning/spontaneous/gen_target_only.wav)
+- `controlled`：将 `red / read` 设成不同时长，并在纠正前加入短停顿  
+  [试听](./outputs/controlled_demos/default_voice/05_contrastive_meaning/05_contrastive_meaning/controlled/gen_target_only.wav)
+
+### 英文展示 2：戏剧化台词
+
+目标：展示英文叙事里的悬念停顿和结尾动作词拉长。
+
+文本：`She opened the door and whispered, run.`
+
+- `spontaneous`：不提供任何 target-side 显式时长，由模型自然完成整句叙事  
+  [试听](./outputs/spontaneous_demos/06_dramatic_line/spontaneous/gen_target_only.wav)
+- `controlled`：在 `run` 前加入短暂停顿，并把结尾动作词拉长  
+  [试听](./outputs/controlled_demos/default_voice/06_dramatic_line/06_dramatic_line/controlled/gen_target_only.wav)
+
 ---
 
 ## English
@@ -119,3 +141,17 @@ Text: `前方到站，五山站。`
 - `v2` pause only: keep content at `170 ms`, set the boundary pause to `260 ms` [listen](./outputs/controlled_demos/default_voice/04_station_wushanzhan/04_station_wushanzhan/v2_pause_only_station_boundary/gen_target_only.wav)
 - `v3` pause + content: keep the `260 ms` pause and lengthen `五 / 山 / 站` to `300 ms` [listen](./outputs/controlled_demos/default_voice/04_station_wushanzhan/04_station_wushanzhan/v3_pause_plus_char_station_name/gen_target_only.wav)
 - `spontaneous`: do not provide any text duration, letting MAGIC-TTS decide timing on its own [listen](./outputs/spontaneous_demos/04_station_wushanzhan/spontaneous/gen_target_only.wav)
+
+### 5. Contrastive Meaning
+
+Text: `I said red notebook, not read notebook.`
+
+- `spontaneous`: do not provide any text duration, letting MAGIC-TTS handle the contrast naturally [listen](./outputs/spontaneous_demos/05_contrastive_meaning/spontaneous/gen_target_only.wav)
+- `controlled`: assign different durations to `red / read` and insert a short correction pause [listen](./outputs/controlled_demos/default_voice/05_contrastive_meaning/05_contrastive_meaning/controlled/gen_target_only.wav)
+
+### 6. Dramatic Line
+
+Text: `She opened the door and whispered, run.`
+
+- `spontaneous`: do not provide any text duration, letting MAGIC-TTS narrate the line on its own [listen](./outputs/spontaneous_demos/06_dramatic_line/spontaneous/gen_target_only.wav)
+- `controlled`: insert a short suspense pause before `run` and stretch the final action word [listen](./outputs/controlled_demos/default_voice/06_dramatic_line/06_dramatic_line/controlled/gen_target_only.wav)
