@@ -50,15 +50,8 @@ python -m pip install -e .
 - Prompt 音频：[prompt.wav](./assets/default_prompt/prompt.wav)
 - Prompt 文本：[prompt.txt](./assets/default_prompt/prompt.txt)
 - Prompt 时序轨：[prompt_track.json](./assets/default_prompt/prompt_track.json)
-- Checkpoint 目录说明见：[checkpoints/README.md](./checkpoints/README.md)
 
-### 直接试听
-
-- [四场景控制 demo](./outputs/controlled_demos/default_voice)
-- [四场景 spontaneous demo](./outputs/spontaneous_demos)
-- [完整时序轨样例](./outputs/control_track_example)
-
-### 复现四个 demo 场景
+### 复现 demo 页样本
 
 ```bash
 python inference/run_paper_demos.py \
@@ -179,15 +172,8 @@ python -m pip install -e .
 - Prompt audio: [prompt.wav](./assets/default_prompt/prompt.wav)
 - Prompt transcript: [prompt.txt](./assets/default_prompt/prompt.txt)
 - Prompt timing track: [prompt_track.json](./assets/default_prompt/prompt_track.json)
-- Checkpoint directory note: [checkpoints/README.md](./checkpoints/README.md)
 
-### Listen To The Demos
-
-- [4-scene controlled demo](./outputs/controlled_demos/default_voice)
-- [4-scene spontaneous demo](./outputs/spontaneous_demos)
-- [full timing-track example](./outputs/control_track_example)
-
-### Reproduce The 4 Controlled Demo Scenes
+### Reproduce The Demo-Page Samples
 
 ```bash
 python inference/run_paper_demos.py \
