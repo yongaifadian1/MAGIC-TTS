@@ -4,12 +4,16 @@
 
 # MAGIC-TTS: Fine-Grained Controllable Speech Synthesis with Explicit Local Duration and Pause Control
 
+<p align="center"><strong>Jialong Mai, Xiaofen Xing, Xiangmin Xu</strong></p>
+<p align="center">华南理工大学数字孪生人重点实验室</p>
+
 中文 | [English](#english)
 
 ## 中文
 
 - 在线 Demo: https://yongaifadian1.github.io/MAGIC-TTS/
 - Hugging Face: https://huggingface.co/maimai11/MAGIC-TTS
+- 论文 PDF: [papers/main.pdf](./papers/main.pdf)
 
 MAGIC-TTS 是一个支持细粒度局部时序控制的语音合成系统。它既可以对指定 token 的内容时长和停顿进行毫秒级控制，也可以在不提供任何显式时长的情况下自然生成语音。
 
@@ -135,6 +139,7 @@ MAGIC-TTS 使用了 F5-TTS 提供的 backbone 实现，并以其公开 checkpoin
 
 - Online demo: https://yongaifadian1.github.io/MAGIC-TTS/
 - Hugging Face: https://huggingface.co/maimai11/MAGIC-TTS
+- Paper PDF: [papers/main.pdf](./papers/main.pdf)
 
 MAGIC-TTS is a speech synthesis system with explicit fine-grained local timing control. It supports millisecond-level control over selected token durations and pauses, and it can also generate speech naturally without any explicit duration input.
 
@@ -251,3 +256,17 @@ After the script finishes, `outputs/prompt_alignment` will contain:
 ### Acknowledgement
 
 MAGIC-TTS builds on the backbone implementation provided by F5-TTS and uses its public checkpoint as the initialization starting point for training.
+
+### Citation
+
+If this repository is useful in your work, you can cite it as:
+
+```bibtex
+@misc{magictts_github,
+  title        = {MAGIC-TTS},
+  author       = {Jialong Mai and Xiaofen Xing and Xiangmin Xu},
+  howpublished = {\url{https://github.com/yongaifadian1/MAGIC-TTS}},
+  note         = {GitHub repository},
+  year         = {2026}
+}
+```
