@@ -66,7 +66,8 @@ code {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
   gap: 28px;
-  padding: 32px;
+  padding: 28px 30px 22px;
+  align-items: start;
 }
 
 .hero-kicker,
@@ -96,18 +97,22 @@ code {
 }
 
 .hero-text,
-.overview-card p,
 .scene-goal,
 .audio-card p {
   color: var(--muted);
   line-height: 1.68;
 }
 
+.hero-text {
+  max-width: 62ch;
+  margin: 14px 0 0;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .button {
@@ -134,8 +139,9 @@ code {
 
 .hero-side {
   display: grid;
-  gap: 14px;
+  gap: 12px;
   align-content: start;
+  justify-items: end;
 }
 
 .lang-switch {
@@ -166,20 +172,22 @@ code {
 }
 
 .logo {
-  width: min(100%, 260px);
-}
-
-.stat-grid {
-  display: grid;
-  gap: 12px;
+  width: min(100%, 230px);
 }
 
 .stat-card,
-.overview-card,
 .audio-card {
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--panel-soft);
+}
+
+.hero-stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 2px;
 }
 
 .stat-card {
@@ -210,16 +218,6 @@ code {
 .section-heading h2 {
   font-size: clamp(24px, 3vw, 34px);
   letter-spacing: -0.02em;
-}
-
-.overview-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.overview-card {
-  padding: 18px;
 }
 
 .scene-card {
@@ -286,9 +284,12 @@ audio {
 
 @media (max-width: 1040px) {
   .hero,
-  .overview-grid,
   .audio-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
   }
 
   .audio-grid-controlled,
@@ -304,7 +305,6 @@ audio {
   }
 
   .hero,
-  .overview-grid,
   .audio-grid {
     grid-template-columns: 1fr;
   }
@@ -317,6 +317,14 @@ audio {
   .hero,
   .section {
     padding: 18px;
+  }
+
+  .hero-side {
+    justify-items: start;
+  }
+
+  .logo {
+    width: min(100%, 210px);
   }
 
   .scene-card {
