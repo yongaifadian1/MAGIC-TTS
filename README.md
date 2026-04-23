@@ -133,6 +133,20 @@ python inference/align_prompt_with_mfa.py \
 
 MAGIC-TTS 使用了 F5-TTS 提供的 backbone 实现，并以其公开 checkpoint 作为训练初始化起点。
 
+### 引用
+
+如果这个仓库对你的工作有帮助，可以按下面方式引用：
+
+```bibtex
+@misc{magictts_github,
+  title        = {MAGIC-TTS},
+  author       = {Jialong Mai and Xiaofen Xing and Xiangmin Xu},
+  howpublished = {\url{https://github.com/yongaifadian1/MAGIC-TTS}},
+  note         = {GitHub repository},
+  year         = {2026}
+}
+```
+
 ---
 
 ## English
