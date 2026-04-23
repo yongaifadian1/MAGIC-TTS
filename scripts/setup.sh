@@ -78,6 +78,8 @@ PY
 fi
 
 export MFA_ROOT_DIR="$MFA_ROOT"
+mfa model download dictionary english_mfa
+mfa model download acoustic english_mfa
 mfa model download dictionary mandarin_mfa
 mfa model download acoustic mandarin_mfa
 
