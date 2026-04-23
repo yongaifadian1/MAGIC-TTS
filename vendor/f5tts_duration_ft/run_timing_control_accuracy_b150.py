@@ -31,7 +31,7 @@ DEFAULT_MANIFEST = (
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "outputs" / "timing_control_accuracy_b150_seed2026"
 DEFAULT_SYNTH_PYTHON = os.environ.get("MAGICTTS_SYNTH_PYTHON", sys.executable)
 SYNTH_SCRIPT = SCRIPT_DIR / "ttrack_edit_synthesize.py"
-MFA_ENV = Path(os.environ.get("MAGICTTS_MFA_ENV", str((REPO_ROOT / ".conda_envs" / "mfa").resolve())))
+MFA_BIN = os.environ.get("MAGICTTS_MFA_BIN")
 MFA_ROOT = Path(os.environ.get("MAGICTTS_MFA_ROOT", str((REPO_ROOT / ".mfa_root").resolve())))
 PAUSE_F1_THRESHOLDS_MS = (50.0, 100.0)
 
@@ -96,6 +96,17 @@ def parse_args():
         help="Use full prompt+target text and full token-duration track at inference time.",
     )
     return parser.parse_args()
+
+
+def resolve_mfa_bin() -> str:
+    if MFA_BIN:
+        return MFA_BIN
+    path_mfa = shutil.which("mfa")
+    if path_mfa:
+        return path_mfa
+    raise FileNotFoundError(
+        "mfa not found in PATH; install montreal-forced-aligner or set MAGICTTS_MFA_BIN"
+    )
 
 
 def tagged_name(base_name, result_tag):
@@ -501,7 +512,6 @@ def mfa_env(runtime_root):
     env = os.environ.copy()
     env["MFA_ROOT_DIR"] = str(runtime_root)
     env["PKUSEG_HOME"] = str(MFA_ROOT / "pkuseg")
-    env["PATH"] = f"{MFA_ENV / 'bin'}:{env.get('PATH', '')}"
     return env
 
 
@@ -567,7 +577,7 @@ def run_mfa_for_language(samples, output_dir, language, num_jobs, keep_workdir, 
 
         model_info = LANGUAGE_MODELS[language]
         cmd = [
-            str(MFA_ENV / "bin" / "mfa"),
+            resolve_mfa_bin(),
             "align",
             str(corpus_dir),
             str(model_info["dictionary"]),

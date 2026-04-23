@@ -10,15 +10,25 @@ DOWNLOAD_BASE_CKPT="${MAGICTTS_DOWNLOAD_BASE_CKPT:-0}"
 SKIP_PIP_INSTALL="${MAGICTTS_SKIP_PIP_INSTALL:-0}"
 TORCH_VERSION="${MAGICTTS_TORCH_VERSION:-2.3.0}"
 TORCH_WHL_INDEX="${MAGICTTS_TORCH_WHL_INDEX:-https://download.pytorch.org/whl/cu118}"
+MFA_ROOT="${MAGICTTS_MFA_ROOT:-$REPO_ROOT/.mfa_root}"
 
 mkdir -p "$PRETRAINED_ROOT/F5TTS_Base" "$PRETRAINED_ROOT/vocos-mel-24khz"
+mkdir -p "$MFA_ROOT/pkuseg"
+
+if ! command -v conda >/dev/null 2>&1; then
+  echo "conda not found in PATH; activate your conda environment before running scripts/setup.sh" >&2
+  exit 1
+fi
+
+conda install -c conda-forge ffmpeg montreal-forced-aligner -y
+hash -r
 
 if [[ "$SKIP_PIP_INSTALL" != "1" ]]; then
   "$PYTHON_BIN" -m pip install \
     --index-url "$TORCH_WHL_INDEX" \
     "torch==${TORCH_VERSION}" \
     "torchaudio==${TORCH_VERSION}"
-  "$PYTHON_BIN" -m pip install -e "$REPO_ROOT"
+  "$PYTHON_BIN" -m pip install -e "$REPO_ROOT" spacy-pkuseg dragonmapper hanziconv
 fi
 
 if [[ -n "$LOCAL_F5R_ROOT" ]]; then
@@ -66,6 +76,17 @@ if download_base:
     )
 PY
 fi
+
+export MFA_ROOT_DIR="$MFA_ROOT"
+mfa model download dictionary mandarin_mfa
+mfa model download acoustic mandarin_mfa
+
+export PKUSEG_HOME="$MFA_ROOT/pkuseg"
+"$PYTHON_BIN" - <<'PY'
+import spacy_pkuseg
+
+spacy_pkuseg.pkuseg(postag=True)
+PY
 
 if ! command -v ffprobe >/dev/null 2>&1; then
   echo "ffprobe not found in PATH; install ffmpeg before running inference." >&2

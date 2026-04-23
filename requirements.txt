@@ -9,6 +9,6 @@ pypinyin
 safetensors
 soundfile
 torchdiffeq
-transformers
+transformers<5
 vocos
 x-transformers

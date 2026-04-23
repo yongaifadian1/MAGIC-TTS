@@ -33,15 +33,9 @@ conda activate magictts
 bash scripts/setup.sh
 ```
 
-`setup.sh` 会安装 Python 依赖，并把 tokenizer / vocoder 下载到 `pretrained/`。
+`setup.sh` 会安装 Python 依赖、`ffmpeg` / `montreal-forced-aligner`、fine-grained control 所需的中文依赖与 MFA 资源，并把 tokenizer / vocoder 下载到 `pretrained/`。
 
 你仍需要从 Hugging Face 下载 MAGIC-TTS checkpoint，并放到 `checkpoints/`，例如 `checkpoints/magictts_36k.pt`。
-
-如果要使用精细控制，再额外安装：
-
-```bash
-conda install -c conda-forge ffmpeg montreal-forced-aligner -y
-```
 
 ### 安装为本地包
 
@@ -173,15 +167,9 @@ conda activate magictts
 bash scripts/setup.sh
 ```
 
-`setup.sh` installs the Python dependencies and downloads tokenizer / vocoder assets into `pretrained/`.
+`setup.sh` installs the Python dependencies, `ffmpeg` / `montreal-forced-aligner`, the extra Chinese dependencies and MFA assets required by the controlled path, and downloads tokenizer / vocoder assets into `pretrained/`.
 
 You still need to download the MAGIC-TTS checkpoint from Hugging Face and place it under `checkpoints/`, for example `checkpoints/magictts_36k.pt`.
-
-For fine-grained control, also install:
-
-```bash
-conda install -c conda-forge ffmpeg montreal-forced-aligner -y
-```
 
 ### Install As A Local Package
 
