@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "magictts"
+version = "0.1.0"
+description = "Fine-grained controllable speech synthesis with explicit local duration and pause control."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "MAGIC-TTS Authors" },
+]
+keywords = ["tts", "speech-synthesis", "voice-cloning", "controllable-tts"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+dependencies = [
+  "einops",
+  "huggingface_hub",
+  "jieba",
+  "librosa",
+  "matplotlib",
+  "numpy",
+  "pydub",
+  "pypinyin",
+  "safetensors",
+  "soundfile",
+  "torchdiffeq",
+  "transformers",
+  "vocos",
+  "x-transformers",
+]
+
+[tool.setuptools]
+packages = ["f5_tts"]

@@ -1,0 +1,41 @@
+{
+  "slug": "03_accessibility_code",
+  "title": "Accessibility Code Reading",
+  "variants": [
+    {
+      "slug": "v1_baseline_eqdur",
+      "text": "验证码是三七九，二一八。",
+      "seed": 1303,
+      "notes": "Baseline: every content token uses the uniform baseline duration.",
+      "duration_ms": {},
+      "pause_ms": {}
+    },
+    {
+      "slug": "v2_pause_only_grouped",
+      "text": "验证码是三七九，二一八。",
+      "seed": 1303,
+      "notes": "Only add the group pause at the 3+3 boundary.",
+      "duration_ms": {},
+      "pause_ms": {
+        "，": 260.0
+      }
+    },
+    {
+      "slug": "v3_pause_plus_char_digits",
+      "text": "验证码是三七九，二一八。",
+      "seed": 1303,
+      "notes": "Add the group pause and lengthen the six digits.",
+      "duration_ms": {
+        "三": 300.0,
+        "七": 300.0,
+        "九": 300.0,
+        "二": 300.0,
+        "一": 300.0,
+        "八": 300.0
+      },
+      "pause_ms": {
+        "，": 260.0
+      }
+    }
+  ]
+}

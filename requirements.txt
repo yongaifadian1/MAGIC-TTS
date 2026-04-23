@@ -1,0 +1,14 @@
+einops
+huggingface_hub
+jieba
+librosa
+matplotlib
+numpy
+pydub
+pypinyin
+safetensors
+soundfile
+torchdiffeq
+transformers
+vocos
+x-transformers

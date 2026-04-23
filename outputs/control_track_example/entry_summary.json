@@ -1,0 +1,11 @@
+{
+  "mode": "controlled",
+  "prompt_audio": "./assets/default_prompt/prompt.wav",
+  "prompt_text": "也成为了世界首家全面运用SAP系统管理的调味品级。",
+  "target_text": "前方路口左转。",
+  "raw_target_text": "前方路口左转。",
+  "checkpoint": "./checkpoints/magictts_36k.pt",
+  "control_json": null,
+  "control_source": "inline_target_text",
+  "default_content_ms_for_unmarked_chars": 170.0
+}

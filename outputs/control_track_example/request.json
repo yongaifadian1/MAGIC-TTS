@@ -1,0 +1,13 @@
+{
+  "slug": "controlled_inline",
+  "text": "前方路口左转。",
+  "seed": null,
+  "notes": "Controlled by inline markers in --target-text.",
+  "duration_ms": {
+    "左#1": 300.0,
+    "转#1": 300.0
+  },
+  "pause_ms": {
+    "口#1": 260.0
+  }
+}

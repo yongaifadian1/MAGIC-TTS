@@ -1,0 +1,37 @@
+{
+  "slug": "01_navigation_turn",
+  "title": "Navigation Turn",
+  "variants": [
+    {
+      "slug": "v1_baseline_eqdur",
+      "text": "前方路口，左转。",
+      "seed": 1101,
+      "notes": "Baseline: every content token uses the uniform baseline duration.",
+      "duration_ms": {},
+      "pause_ms": {}
+    },
+    {
+      "slug": "v2_pause_only_boundary",
+      "text": "前方路口，左转。",
+      "seed": 1101,
+      "notes": "Only add the boundary pause before the action phrase.",
+      "duration_ms": {},
+      "pause_ms": {
+        "，": 260.0
+      }
+    },
+    {
+      "slug": "v3_pause_plus_char_turn",
+      "text": "前方路口，左转。",
+      "seed": 1101,
+      "notes": "Add the boundary pause and lengthen the action characters.",
+      "duration_ms": {
+        "左": 300.0,
+        "转": 300.0
+      },
+      "pause_ms": {
+        "，": 260.0
+      }
+    }
+  ]
+}

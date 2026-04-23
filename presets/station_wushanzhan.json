@@ -1,0 +1,38 @@
+{
+  "slug": "04_station_wushanzhan",
+  "title": "Station Arrival Wushan Station",
+  "variants": [
+    {
+      "slug": "v1_baseline_eqdur",
+      "text": "前方到站，五山站。",
+      "seed": 1404,
+      "notes": "Baseline: every content token uses the uniform baseline duration.",
+      "duration_ms": {},
+      "pause_ms": {}
+    },
+    {
+      "slug": "v2_pause_only_station_boundary",
+      "text": "前方到站，五山站。",
+      "seed": 1404,
+      "notes": "Only add the station-boundary pause before the station name.",
+      "duration_ms": {},
+      "pause_ms": {
+        "，": 260.0
+      }
+    },
+    {
+      "slug": "v3_pause_plus_char_station_name",
+      "text": "前方到站，五山站。",
+      "seed": 1404,
+      "notes": "Add the station-boundary pause and lengthen the station name characters.",
+      "duration_ms": {
+        "五": 300.0,
+        "山": 300.0,
+        "站#2": 300.0
+      },
+      "pause_ms": {
+        "，": 260.0
+      }
+    }
+  ]
+}

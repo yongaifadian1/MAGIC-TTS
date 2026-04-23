@@ -1,0 +1,37 @@
+{
+  "slug": "02_kids_reading",
+  "title": "Kids Reading",
+  "variants": [
+    {
+      "slug": "v1_baseline_eqdur",
+      "text": "请跟我读，苹果。",
+      "seed": 1202,
+      "notes": "Baseline: every content token uses the uniform baseline duration.",
+      "duration_ms": {},
+      "pause_ms": {}
+    },
+    {
+      "slug": "v2_pause_only_syllable",
+      "text": "请跟我读，苹果。",
+      "seed": 1202,
+      "notes": "Only add the instructional pause before the target word.",
+      "duration_ms": {},
+      "pause_ms": {
+        "，": 260.0
+      }
+    },
+    {
+      "slug": "v3_pause_plus_char_syllable",
+      "text": "请跟我读，苹果。",
+      "seed": 1202,
+      "notes": "Add the instructional pause and lengthen the target characters.",
+      "duration_ms": {
+        "苹": 300.0,
+        "果": 300.0
+      },
+      "pause_ms": {
+        "，": 260.0
+      }
+    }
+  ]
+}
