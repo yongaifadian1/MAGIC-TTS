@@ -6,6 +6,9 @@
 
 <p align="center"><strong>Jialong Mai, Xiaofen Xing, Xiangmin Xu</strong></p>
 <p align="center">华南理工大学数字孪生人重点实验室</p>
+<p align="center">
+  <img src="./share.png" alt="MAGIC-TTS samples" width="100%">
+</p>
 
 中文 | [English](#english)
 
