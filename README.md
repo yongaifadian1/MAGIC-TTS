@@ -9,7 +9,7 @@
 <p align="center">
   <a href="https://www.python.org/downloads/release/python-3100/"><img src="https://img.shields.io/badge/Python-3.10-4c1?style=flat-square" alt="Python 3.10"></a>
   <a href="https://arxiv.org/abs/2604.21164"><img src="https://img.shields.io/badge/arXiv-2604.21164-b31b1b?style=flat-square&logo=arxiv&logoColor=white" alt="arXiv 2604.21164"></a>
-  <a href="https://github.com/yongaifadian1/MAGIC-TTS"><img src="https://img.shields.io/badge/GitHub-MAGIC--TTS-24292f?style=flat-square&logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://huggingface.co/maimai11/MAGIC-TTS"><img src="https://img.shields.io/badge/Hugging%20Face-MAGIC--TTS-ffbf00?style=flat-square" alt="Hugging Face"></a>
   <a href="https://yongaifadian1.github.io/MAGIC-TTS/"><img src="https://img.shields.io/badge/Demo%20page-Online-f28c38?style=flat-square" alt="Demo page"></a>
 </p>
 <p align="center">
