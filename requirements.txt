@@ -1,3 +1,6 @@
+accelerate
+datasets
+ema-pytorch
 einops
 huggingface_hub
 jieba
@@ -8,7 +11,10 @@ pydub
 pypinyin
 safetensors
 soundfile
+tensorboard
 torchdiffeq
+tqdm
 transformers<5
 vocos
+wandb
 x-transformers

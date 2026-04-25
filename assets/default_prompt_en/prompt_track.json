@@ -1,5 +1,5 @@
 {
-  "prompt_audio": "/public/home/202420164005/data/Emilia_decoded/EN/EN-B000028/EN_B00002_S02058_W000018.mp3",
+  "prompt_audio": "./assets/default_prompt_en/prompt.mp3",
   "prompt_text": "An account of Mrs. didn't even get caught and learn her lesson.",
   "language": "en",
   "prompt_id": "EN_B00002_S02058_W000018",
@@ -260,5 +260,5 @@
   "prompt_frames": 308.71875,
   "num_words": 12,
   "residual_frames_added_to_last_pause": 17.156259834766388,
-  "source_words_json": "/public/home/202420164005/pazhou-data/F5-TTS/data/Emilia_ttrack_mfa_sidecars_full_v1/EN/EN-B000028/EN_B00002_S02058_W000018.words.json"
+  "source_words_json": "./assets/default_prompt_en/prompt_alignment_raw.json"
 }

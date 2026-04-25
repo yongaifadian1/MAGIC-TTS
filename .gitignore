@@ -9,11 +9,16 @@ env/
 
 logs/
 pretrained/
+runs/
 checkpoints/*.pt
 checkpoints/*.ckpt
 checkpoints/*.safetensors
 checkpoints/*.bin
 checkpoints/*.pth
+
+data/**
+!data/
+!data/README.md
 
 outputs/**
 !outputs/README.md
@@ -26,3 +31,7 @@ outputs/**
 
 .mfa_root/
 .conda_envs/
+*.slurm.out
+data/.tmp_eval_smoke_check/
+data/b150_public_eval_smoke_100/
+data/b150_public_eval_smoke_100_release2/

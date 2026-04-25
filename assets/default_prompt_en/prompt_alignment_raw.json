@@ -1,7 +1,7 @@
 {
   "source": "mfa",
   "language": "en",
-  "audio_path": "/public/home/202420164005/data/Emilia_decoded/EN/EN-B000028/EN_B00002_S02058_W000018.mp3",
+  "audio_path": "./assets/default_prompt_en/prompt.mp3",
   "raw_text": "An account of Mrs. didn't even get caught and learn her lesson.",
   "segments": [
     {
