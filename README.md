@@ -42,6 +42,8 @@ conda activate magictts
 bash scripts/setup.sh
 ```
 
+# MAGIC-TTS-BETA
+
 `setup.sh` 会安装 Python 依赖、`ffmpeg` / `montreal-forced-aligner`、fine-grained control 所需的中文依赖与 MFA 资源，并把 tokenizer / vocoder 下载到 `pretrained/`。
 
 你仍需要从 Hugging Face 下载 MAGIC-TTS checkpoint，并放到 `checkpoints/`，例如 `checkpoints/magictts_36k.pt`。
