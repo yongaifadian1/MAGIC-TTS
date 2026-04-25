@@ -13,6 +13,7 @@ VENDOR_ROOT = REPO_ROOT / "vendor" / "f5tts_duration_ft"
 PRETRAINED_ROOT = Path(os.environ.get("MAGICTTS_PRETRAINED_ROOT", str((REPO_ROOT / "pretrained").resolve())))
 DEFAULT_DATASET = REPO_ROOT / "data" / "b150_public"
 DEFAULT_CHECKPOINT_ROOT = REPO_ROOT / "checkpoints" / "finetune_runs"
+DEFAULT_INIT_MODEL_CKPT = REPO_ROOT / "checkpoints" / "magictts_36k.pt"
 DEFAULT_PRETRAINED_CKPT = PRETRAINED_ROOT / "F5TTS_Base" / "model_1200000.safetensors"
 DEFAULT_TOKENIZER = PRETRAINED_ROOT / "F5TTS_Base" / "vocab.txt"
 DEFAULT_VOCODER = PRETRAINED_ROOT / "vocos-mel-24khz"
@@ -46,7 +47,7 @@ def parse_args():
     parser.add_argument("--run-name", default="magictts_finetune")
     parser.add_argument("--checkpoint-dir", default=None)
     parser.add_argument("--pretrained-ckpt", default=str(DEFAULT_PRETRAINED_CKPT))
-    parser.add_argument("--init-model-ckpt", default=None)
+    parser.add_argument("--init-model-ckpt", default=str(DEFAULT_INIT_MODEL_CKPT))
     parser.add_argument("--tokenizer-path", default=str(DEFAULT_TOKENIZER))
     parser.add_argument("--sample-vocoder-path", default=str(DEFAULT_VOCODER))
     parser.add_argument("--logger", default="tensorboard", choices=["tensorboard", "wandb", "none"])
@@ -194,6 +195,9 @@ def configure_env(args, checkpoint_dir: Path) -> None:
 def main():
     args = parse_args()
     import_training_modules()
+
+    if args.init_model_ckpt is not None and str(args.init_model_ckpt).strip().lower() in {"", "none", "null"}:
+        args.init_model_ckpt = None
 
     dataset_path = Path(args.dataset).resolve()
     if not dataset_path.exists():

@@ -42,8 +42,6 @@ conda activate magictts
 bash scripts/setup.sh
 ```
 
-# MAGIC-TTS-BETA
-
 `setup.sh` 会安装 Python 依赖、`ffmpeg` / `montreal-forced-aligner`、fine-grained control 所需的中文依赖与 MFA 资源，并把 tokenizer / vocoder 下载到 `pretrained/`。
 
 你仍需要从 Hugging Face 下载 MAGIC-TTS checkpoint，并放到 `checkpoints/`，例如 `checkpoints/magictts_36k.pt`。
@@ -75,6 +73,19 @@ python inference/run_spontaneous_suite.py \
 ### 本地 Fine-Tune
 
 这个仓库已经集成了本地 fine-tune 入口，不再依赖额外的 `F5R-TTS` 源码仓。
+
+如果希望训练，需要额外安装训练依赖：
+
+```bash
+python -m pip install \
+  "accelerate==1.12.0" \
+  "datasets==3.6.0" \
+  "tensorboard==2.20.0" \
+  "wandb==0.20.1" \
+  "ema-pytorch==0.7.7"
+```
+
+默认会从 `checkpoints/magictts_36k.pt` 初始化；如果想改用 F5-TTS base checkpoint，再额外传 `--pretrained-ckpt` 并把 `--init-model-ckpt` 置空。
 
 ```bash
 bash scripts/run_finetune.sh \
@@ -247,6 +258,22 @@ python inference/run_spontaneous_suite.py \
 
 This repository also includes a local fine-tuning entrypoint and does not
 depend on an external `F5R-TTS` checkout.
+
+If you want to fine-tune locally, install the extra training dependencies
+first:
+
+```bash
+python -m pip install \
+  "accelerate==1.12.0" \
+  "datasets==3.6.0" \
+  "tensorboard==2.20.0" \
+  "wandb==0.20.1" \
+  "ema-pytorch==0.7.7"
+```
+
+Fine-tuning now defaults to initializing from `checkpoints/magictts_36k.pt`.
+If you want to start from the F5-TTS base checkpoint instead, pass
+`--pretrained-ckpt` and leave `--init-model-ckpt` empty.
 
 ```bash
 bash scripts/run_finetune.sh \

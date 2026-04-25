@@ -7,7 +7,8 @@ external source trees such as a separate `F5R-TTS` checkout.
 
 1. A prepared dataset directory.
 2. Local pretrained assets under `pretrained/`.
-3. A CUDA-capable PyTorch environment.
+3. A downloaded MAGIC-TTS checkpoint under `checkpoints/`.
+4. A CUDA-capable PyTorch environment.
 
 The default expected main training dataset location is:
 
@@ -21,11 +22,19 @@ For a lightweight smoke-test split, the repository already includes:
 data/b150_public_eval_smoke_100_pkg
 ```
 
-The default expected base checkpoint is:
+The default training initialization checkpoint is:
+
+```text
+checkpoints/magictts_36k.pt
+```
+
+An optional F5-TTS base checkpoint can still be used through:
 
 ```text
 pretrained/F5TTS_Base/model_1200000.safetensors
 ```
+
+and passed explicitly with `--pretrained-ckpt` when needed.
 
 ## Dataset Format
 
@@ -134,13 +143,23 @@ Resume automatically from:
 checkpoints/finetune_runs/<run-name>/model_last.pt
 ```
 
-Initialize from an existing fine-tuned checkpoint:
+Initialize from a different MAGIC-TTS training checkpoint:
 
 ```bash
 bash scripts/run_finetune.sh \
   --dataset data/b150_public \
   --run-name b150_public_plus10k \
   --init-model-ckpt checkpoints/magictts_36k.pt
+```
+
+Initialize from the F5-TTS base checkpoint instead:
+
+```bash
+bash scripts/run_finetune.sh \
+  --dataset data/b150_public \
+  --run-name b150_public_from_base \
+  --init-model-ckpt "" \
+  --pretrained-ckpt pretrained/F5TTS_Base/model_1200000.safetensors
 ```
 
 ## Useful Flags
