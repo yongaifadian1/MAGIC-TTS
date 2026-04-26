@@ -1,0 +1,18 @@
+{
+  "slug": "controlled_inline",
+  "text": "I said red notebook, not read notebook.",
+  "seed": null,
+  "notes": "Controlled by inline markers in --target-text.",
+  "duration_ms": {
+    "r#1": 140.0,
+    "e#1": 140.0,
+    "d#2": 140.0,
+    "r#2": 155.0,
+    "e#3": 155.0,
+    "a#2": 155.0,
+    "d#3": 155.0
+  },
+  "pause_ms": {
+    ",#1": 160.0
+  }
+}

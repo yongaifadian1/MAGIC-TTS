@@ -1,0 +1,11 @@
+{
+  "mode": "controlled",
+  "prompt_audio": "/public/home/202420164005/code/MAGIC-TTS/assets/default_prompt_en/prompt.mp3",
+  "prompt_text": "An account of Mrs. didn't even get caught and learn her lesson.",
+  "target_text": "She opened the door and whispered, run.",
+  "raw_target_text": "She opened the door and whispered,[180] run{560}.",
+  "checkpoint": "/public/home/202420164005/code/MAGIC-TTS/checkpoints/magictts_36k.pt",
+  "control_json": null,
+  "control_source": "inline_target_text",
+  "default_content_ms_for_unmarked_chars": 55.0
+}

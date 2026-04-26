@@ -95,15 +95,6 @@ python training/export_public_eval_smoke.py \
   --overwrite
 ```
 
-To publish an already prepared package to Hugging Face:
-
-```bash
-python training/upload_hf_dataset.py \
-  --dataset-dir data/b150_public_eval_smoke_100_pkg \
-  --repo-id <your-hf-user-or-org>/b150-public-eval-smoke-100 \
-  --create-repo
-```
-
 ## Setup
 
 ```bash

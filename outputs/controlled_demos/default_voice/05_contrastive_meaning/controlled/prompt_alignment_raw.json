@@ -1,0 +1,75 @@
+{
+  "source": "mfa",
+  "language": "en",
+  "audio_path": "/public/home/202420164005/data/Emilia_decoded/EN/EN-B000028/EN_B00002_S02058_W000018.mp3",
+  "raw_text": "An account of Mrs. didn't even get caught and learn her lesson.",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.109999895095825,
+      "text": "An account of Mrs. didn't even get caught and learn her lesson.",
+      "words": [
+        {
+          "word": "an",
+          "start": 0.0,
+          "end": 0.11999999731779099
+        },
+        {
+          "word": "account",
+          "start": 0.11999999731779099,
+          "end": 0.46000000834465027
+        },
+        {
+          "word": "of",
+          "start": 0.46000000834465027,
+          "end": 0.550000011920929
+        },
+        {
+          "word": "mrs",
+          "start": 0.550000011920929,
+          "end": 0.9700000286102295
+        },
+        {
+          "word": "didn't",
+          "start": 0.9700000286102295,
+          "end": 1.2400000095367432
+        },
+        {
+          "word": "even",
+          "start": 1.2400000095367432,
+          "end": 1.4299999475479126
+        },
+        {
+          "word": "get",
+          "start": 1.4299999475479126,
+          "end": 1.5800000429153442
+        },
+        {
+          "word": "caught",
+          "start": 1.6399999856948853,
+          "end": 2.069999933242798
+        },
+        {
+          "word": "and",
+          "start": 2.069999933242798,
+          "end": 2.2100000381469727
+        },
+        {
+          "word": "learn",
+          "start": 2.2100000381469727,
+          "end": 2.4000000953674316
+        },
+        {
+          "word": "her",
+          "start": 2.4000000953674316,
+          "end": 2.549999952316284
+        },
+        {
+          "word": "lesson",
+          "start": 2.549999952316284,
+          "end": 3.109999895095825
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "prompt_audio": "/public/home/202420164005/code/MAGIC-TTS/assets/default_prompt_en/prompt.mp3",
+  "prompt_text": "An account of Mrs. didn't even get caught and learn her lesson.",
+  "target_text": "I said red notebook, not read notebook.",
+  "checkpoint": "/public/home/202420164005/code/MAGIC-TTS/checkpoints/magictts_36k.pt",
+  "tokenizer_path": "/public/home/202420164005/code/MAGIC-TTS/pretrained/F5TTS_Base/vocab.txt",
+  "vocoder_path": "/public/home/202420164005/code/MAGIC-TTS/pretrained/vocos-mel-24khz",
+  "output_wav": "/public/home/202420164005/code/MAGIC-TTS/outputs/english_cards_parallel/05_contrast_spontaneous/gen_target_only.wav",
+  "steps": 32,
+  "cfg_strength": 2.0,
+  "sway_sampling_coef": -1.0,
+  "speed": 1.0,
+  "seed": -1,
+  "device": "cuda",
+  "mode": "spontaneous_no_text_duration",
+  "sample_rate": 24000,
+  "spectrogram_shape": [
+    100,
+    177
+  ]
+}

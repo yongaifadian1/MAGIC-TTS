@@ -104,7 +104,7 @@ bash scripts/run_finetune.sh \
   --max-updates 50
 ```
 
-它和训练集使用同样的数据格式，但用途是 smoke test，不建议作为正式实验训练集。上传 Hugging Face 时可直接使用 `training/upload_hf_dataset.py`。
+它和训练集使用同样的数据格式，但用途是 smoke test，不建议作为正式实验训练集。
 
 ### 用自己的 prompt 和文本
 
