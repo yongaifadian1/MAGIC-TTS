@@ -161,73 +161,6 @@ def compute_prompt_boundary_index(audio_path: str, text_tokens, token_durations,
     return best_index
 
 
-class HFDataset(Dataset):
-    def __init__(
-        self,
-        hf_dataset: Dataset,
-        target_sample_rate=24_000,
-        n_mel_channels=100,
-        hop_length=256,
-        n_fft=1024,
-        win_length=1024,
-        mel_spec_type="vocos",
-    ):
-        self.data = hf_dataset
-        self.target_sample_rate = target_sample_rate
-        self.hop_length = hop_length
-
-        self.mel_spectrogram = MelSpec(
-            n_fft=n_fft,
-            hop_length=hop_length,
-            win_length=win_length,
-            n_mel_channels=n_mel_channels,
-            target_sample_rate=target_sample_rate,
-            mel_spec_type=mel_spec_type,
-        )
-
-    def get_frame_len(self, index):
-        row = self.data[index]
-        audio = row["audio"]["array"]
-        sample_rate = row["audio"]["sampling_rate"]
-        return audio.shape[-1] / sample_rate * self.target_sample_rate / self.hop_length
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, index):
-        row = self.data[index]
-        audio = row["audio"]["array"]
-
-        # logger.info(f"Audio shape: {audio.shape}")
-
-        sample_rate = row["audio"]["sampling_rate"]
-        duration = audio.shape[-1] / sample_rate
-
-        if duration > 30 or duration < 1.0:
-            return self.__getitem__((index + 1) % len(self.data))
-
-        audio_tensor = torch.from_numpy(audio).float()
-
-        if sample_rate != self.target_sample_rate:
-            resampler = torchaudio.transforms.Resample(sample_rate, self.target_sample_rate)
-            audio_tensor = resampler(audio_tensor)
-
-        audio_tensor = audio_tensor.unsqueeze(0)  # 't -> 1 t')
-
-        mel_spec = self.mel_spectrogram(audio_tensor)
-
-        mel_spec = mel_spec.squeeze(0)  # '1 d t -> d t'
-
-        text = row["text"]
-        raw_text = row["raw_text"] if "raw_text" in row else None
-
-        return dict(
-            mel_spec=mel_spec,
-            text=text,
-            raw_text=raw_text,
-        )
-
-
 class CustomDataset(Dataset):
     def __init__(
         self,
@@ -418,7 +351,7 @@ def load_dataset(
     audio_type: str = "raw",
     mel_spec_module: nn.Module | None = None,
     mel_spec_kwargs: dict = dict(),
-) -> CustomDataset | HFDataset:
+) -> CustomDataset:
     """
     dataset_type    - "CustomDataset" if you want to use tokenizer name and default data path to load for train_dataset
                     - "CustomDatasetPath" if you just want to pass the full path to a preprocessed dataset without relying on tokenizer
@@ -465,16 +398,6 @@ def load_dataset(
             dataset_root=f"{dataset_name}/raw",
             preprocessed_mel=preprocessed_mel,
             **mel_spec_kwargs,
-        )
-
-    elif dataset_type == "HFDataset":
-        print(
-            "Should manually modify the path of huggingface dataset to your need.\n"
-            + "May also the corresponding script cuz different dataset may have different format."
-        )
-        pre, post = dataset_name.split("_")
-        train_dataset = HFDataset(
-            load_dataset(f"{pre}/{pre}", split=f"train.{post}", cache_dir=str(files("f5_tts").joinpath("../../data"))),
         )
 
     return train_dataset

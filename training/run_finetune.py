@@ -42,7 +42,7 @@ def parse_args():
     parser.add_argument(
         "--dataset-type",
         default="CustomDatasetPath",
-        choices=["CustomDatasetPath", "CustomDataset", "HFDataset"],
+        choices=["CustomDatasetPath", "CustomDataset"],
     )
     parser.add_argument("--run-name", default="magictts_finetune")
     parser.add_argument("--checkpoint-dir", default=None)

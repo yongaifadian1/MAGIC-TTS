@@ -46,6 +46,9 @@ data/b150_public/
   duration.json
 ```
 
+If you use `raw.arrow`, store absolute file paths in each row's `audio_path`
+field. This matches the original MAGIC-TTS training recipe.
+
 `duration.json` must contain a `duration` array aligned with the dataset rows.
 Each row should include:
 
