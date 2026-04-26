@@ -1,8 +1,0 @@
-{
-  "split_name": "b150_public_eval_smoke_100",
-  "purpose": "user smoke-test fine-tuning and pipeline validation",
-  "num_samples": 100,
-  "selected_samples_filename": "selected_samples.jsonl",
-  "format": "raw/ + duration.json",
-  "audio_path_base": "raw/"
-}

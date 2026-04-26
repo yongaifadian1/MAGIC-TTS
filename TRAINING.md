@@ -1,8 +1,5 @@
 # Fine-Tuning MAGIC-TTS
 
-This repository includes a local fine-tuning entrypoint and does not depend on
-external source trees such as a separate `F5R-TTS` checkout.
-
 ## What You Need
 
 1. A prepared dataset directory.
@@ -27,14 +24,6 @@ The default training initialization checkpoint is:
 ```text
 checkpoints/magictts_36k.pt
 ```
-
-An optional F5-TTS base checkpoint can still be used through:
-
-```text
-pretrained/F5TTS_Base/model_1200000.safetensors
-```
-
-and passed explicitly with `--pretrained-ckpt` when needed.
 
 ## Dataset Format
 
@@ -133,16 +122,6 @@ bash scripts/run_finetune.sh \
   --init-model-ckpt checkpoints/magictts_36k.pt
 ```
 
-Initialize from the F5-TTS base checkpoint instead:
-
-```bash
-bash scripts/run_finetune.sh \
-  --dataset data/b150_public \
-  --run-name b150_public_from_base \
-  --init-model-ckpt "" \
-  --pretrained-ckpt pretrained/F5TTS_Base/model_1200000.safetensors
-```
-
 ## Useful Flags
 
 - `--max-updates`
@@ -169,7 +148,6 @@ runs/<run-name>/
 
 ## Notes
 
-- This fine-tuning path uses only code vendored inside this repository.
 - It assumes the dataset has already been prepared into the release format.
 - If you want to open-source the full public B@150 training set later, ship the
   prepared dataset or a reproducible export pipeline separately.
