@@ -16,10 +16,10 @@ The default expected main training dataset location is:
 data/b150_public
 ```
 
-For a lightweight smoke-test split, the repository already includes:
+For a lightweight smoke-test split, download the released package from Hugging Face:
 
 ```text
-data/b150_public_eval_smoke_100_pkg
+https://huggingface.co/datasets/maimai11/b150_official_test_100
 ```
 
 The default training initialization checkpoint is:
@@ -80,20 +80,10 @@ public_train = full_b150_high_confidence - official_b150_test_100
 This repository does not hardcode the held-out 100-sample list yet. Instead, it
 expects the released public dataset to already exclude that official test set.
 
-For user bring-up, a separate `public_eval` smoke split can be published in the
+For user bring-up, a separate `public_eval` smoke split can be downloaded in the
 same format. That split is useful for verifying that data loading, checkpoint
 init, logging, and a short fine-tune run all work end to end, but it should not
 be treated as the main public training split.
-
-Maintainers can rebuild the current 100-sample smoke package from an internal
-`selected_samples.jsonl` source file with:
-
-```bash
-python training/export_public_eval_smoke.py \
-  --selected-samples /path/to/selected_samples.jsonl \
-  --output-dir data/b150_public_eval_smoke_100_pkg \
-  --overwrite
-```
 
 ## Setup
 
@@ -121,7 +111,7 @@ Smoke-test example:
 
 ```bash
 bash scripts/run_finetune.sh \
-  --dataset data/b150_public_eval_smoke_100_pkg \
+  --dataset /path/to/b150_official_test_100 \
   --run-name smoke_eval100 \
   --max-updates 50 \
   --save-updates 50 \

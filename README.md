@@ -70,42 +70,6 @@ python inference/run_spontaneous_suite.py \
   --output-dir outputs/spontaneous_demos
 ```
 
-### 本地 Fine-Tune
-
-这个仓库已经集成了本地 fine-tune 入口，不再依赖额外的 `F5R-TTS` 源码仓。
-
-如果希望训练，需要额外安装训练依赖：
-
-```bash
-python -m pip install \
-  "accelerate==1.12.0" \
-  "datasets==3.6.0" \
-  "tensorboard==2.20.0" \
-  "wandb==0.20.1" \
-  "ema-pytorch==0.7.7"
-```
-
-默认会从 `checkpoints/magictts_36k.pt` 初始化；如果想改用 F5-TTS base checkpoint，再额外传 `--pretrained-ckpt` 并把 `--init-model-ckpt` 置空。
-
-```bash
-bash scripts/run_finetune.sh \
-  --dataset data/b150_public \
-  --run-name b150_public_sft
-```
-
-数据格式、checkpoint 初始化和训练参数说明见 [TRAINING.md](./TRAINING.md)。
-
-如果你只想先低成本跑通训练链路，可以直接使用仓库自带的 `public_eval` 风格 100 条 smoke split：
-
-```bash
-bash scripts/run_finetune.sh \
-  --dataset data/b150_public_eval_smoke_100_pkg \
-  --run-name smoke_eval100 \
-  --max-updates 50
-```
-
-它和训练集使用同样的数据格式，但用途是 smoke test，不建议作为正式实验训练集。
-
 ### 用自己的 prompt 和文本
 
 如果 `target_text` 不带任何控制标记，模型会自动进入 spontaneous 模式。`--prompt-audio` 和 `--prompt-text` 都是可选的；如果省略，就会自动回退到仓库内置默认音色。
@@ -179,6 +143,42 @@ python inference/align_prompt_with_mfa.py \
 - `prompt_track.json`
 
 </details>
+
+### 本地 Fine-Tune
+
+如果希望训练，需要额外安装训练依赖：
+
+```bash
+python -m pip install \
+  "accelerate==1.12.0" \
+  "datasets==3.6.0" \
+  "tensorboard==2.20.0" \
+  "wandb==0.20.1" \
+  "ema-pytorch==0.7.7"
+```
+
+默认会从 `checkpoints/magictts_36k.pt` 初始化。
+
+```bash
+bash scripts/run_finetune.sh \
+  --dataset data/b150_public \
+  --run-name b150_public_sft
+```
+
+数据格式、checkpoint 初始化和训练参数说明见 [TRAINING.md](./TRAINING.md)。
+
+如果你只想先低成本跑通训练链路，可以先从 Hugging Face 下载 `public_eval` 风格 100 条 smoke split：
+
+- https://huggingface.co/datasets/maimai11/b150_official_test_100
+
+```bash
+bash scripts/run_finetune.sh \
+  --dataset /path/to/b150_official_test_100 \
+  --run-name smoke_eval100 \
+  --max-updates 50
+```
+
+它和训练集使用同样的数据格式，但用途是 smoke test，不建议作为正式实验训练集。
 
 ### 致谢
 
@@ -254,38 +254,6 @@ python inference/run_spontaneous_suite.py \
   --output-dir outputs/spontaneous_demos
 ```
 
-### Fine-Tune Locally
-
-This repository also includes a local fine-tuning entrypoint and does not
-depend on an external `F5R-TTS` checkout.
-
-If you want to fine-tune locally, install the extra training dependencies
-first:
-
-```bash
-python -m pip install \
-  "accelerate==1.12.0" \
-  "datasets==3.6.0" \
-  "tensorboard==2.20.0" \
-  "wandb==0.20.1" \
-  "ema-pytorch==0.7.7"
-```
-
-Fine-tuning now defaults to initializing from `checkpoints/magictts_36k.pt`.
-If you want to start from the F5-TTS base checkpoint instead, pass
-`--pretrained-ckpt` and leave `--init-model-ckpt` empty.
-
-```bash
-bash scripts/run_finetune.sh \
-  --dataset data/b150_public \
-  --run-name b150_public_sft
-```
-
-For a low-cost pipeline smoke test, you can directly use the packaged
-`data/b150_public_eval_smoke_100_pkg` split already shipped with this repo.
-
-See [TRAINING.md](./TRAINING.md) for dataset format, publishing, and fine-tuning details.
-
 ### Use Your Own Prompt And Text
 
 If `target_text` does not contain any control marker, the model automatically runs in spontaneous mode. `--prompt-audio` and `--prompt-text` are both optional; if omitted, MAGIC-TTS falls back to the built-in default voice.
@@ -359,6 +327,42 @@ After the script finishes, `outputs/prompt_alignment` will contain:
 - `prompt_track.json`
 
 </details>
+
+### Fine-Tune Locally
+
+If you want to fine-tune locally, install the extra training dependencies
+first:
+
+```bash
+python -m pip install \
+  "accelerate==1.12.0" \
+  "datasets==3.6.0" \
+  "tensorboard==2.20.0" \
+  "wandb==0.20.1" \
+  "ema-pytorch==0.7.7"
+```
+
+Fine-tuning now defaults to initializing from `checkpoints/magictts_36k.pt`.
+
+```bash
+bash scripts/run_finetune.sh \
+  --dataset data/b150_public \
+  --run-name b150_public_sft
+```
+
+For a low-cost pipeline smoke test, you can first download the 100-sample
+`public_eval` split from Hugging Face:
+
+- https://huggingface.co/datasets/maimai11/b150_official_test_100
+
+```bash
+bash scripts/run_finetune.sh \
+  --dataset /path/to/b150_official_test_100 \
+  --run-name smoke_eval100 \
+  --max-updates 50
+```
+
+See [TRAINING.md](./TRAINING.md) for dataset format and fine-tuning details.
 
 ### Acknowledgement
 
