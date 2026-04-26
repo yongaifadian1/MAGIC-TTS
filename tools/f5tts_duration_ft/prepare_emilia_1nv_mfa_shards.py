@@ -100,6 +100,9 @@ def main():
             continue
 
         audio = Path(audio_path)
+        if not audio.is_absolute():
+            audio = (audio_root / audio).resolve()
+
         try:
             rel_audio = audio.relative_to(audio_root)
         except ValueError:
@@ -122,7 +125,7 @@ def main():
         utt_id = f"{lang}_{current_shard_index[lang]:05d}_{current_shard_size[lang]:06d}"
         record = {
             "utt_id": utt_id,
-            "audio_path": audio_path,
+            "audio_path": str(audio),
             "rel_audio_path": rel_audio.as_posix(),
             "text": text,
             "text_field": args.text_field,

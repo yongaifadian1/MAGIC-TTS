@@ -142,6 +142,7 @@ done < "$SHARD_ROOT/shard_list.txt"
   --input-jsonl "${INPUT_JSONL[@]}" \
   --text-field "$TEXT_FIELD" \
   --save-dir "$OUTPUT_DIR" \
+  --audio-root "$AUDIO_ROOT" \
   --alignment-root "$SIDECAR_ROOT" \
   --alignment-audio-root "$AUDIO_ROOT" \
   --require-alignments

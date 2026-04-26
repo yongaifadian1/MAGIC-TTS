@@ -25,6 +25,7 @@ GLOBALS = {
     "text_field": "ground_truth",
     "sample_rate": 24000,
     "hop_length": 256,
+    "audio_root": None,
     "alignment_root": None,
     "alignment_audio_root": DEFAULT_ALIGNMENT_AUDIO_ROOT,
     "require_alignments": False,
@@ -167,21 +168,36 @@ def process_line(line: str):
     if not audio_path or not raw_text:
         return None
 
+    audio = Path(audio_path)
+    if not audio.is_absolute():
+        audio_root = GLOBALS["audio_root"]
+        if not audio_root:
+            return None
+        audio = (Path(audio_root) / audio).resolve()
+    audio_path = str(audio)
+
     raw_text = normalize_text(raw_text)
     if repetition_found(raw_text):
         return None
 
-    meta_path = Path(audio_path).with_suffix(".json")
-    try:
-        with meta_path.open("r", encoding="utf-8") as f:
-            meta = json.load(f)
-        duration = float(meta["duration"])
-    except Exception:
+    duration = obj.get("duration")
+    if duration is not None:
         try:
-            with wave.open(audio_path, "rb") as wf:
-                duration = float(wf.getnframes()) / float(wf.getframerate())
+            duration = float(duration)
         except Exception:
-            return None
+            duration = None
+    if duration is None:
+        meta_path = Path(audio_path).with_suffix(".json")
+        try:
+            with meta_path.open("r", encoding="utf-8") as f:
+                meta = json.load(f)
+            duration = float(meta["duration"])
+        except Exception:
+            try:
+                with wave.open(audio_path, "rb") as wf:
+                    duration = float(wf.getnframes()) / float(wf.getframerate())
+            except Exception:
+                return None
 
     text = raw_text
     token_duration_track = build_token_duration_track(audio_path)
@@ -231,6 +247,11 @@ def parse_args():
     parser.add_argument("--sample-rate", type=int, default=24000)
     parser.add_argument("--hop-length", type=int, default=256)
     parser.add_argument(
+        "--audio-root",
+        default=None,
+        help="Optional root used to resolve relative audio_path entries in the input JSONL.",
+    )
+    parser.add_argument(
         "--alignment-root",
         default=None,
         help="Optional root directory that mirrors audio relative paths and stores *.words.json sidecars.",
@@ -277,6 +298,7 @@ def main():
     GLOBALS["text_field"] = args.text_field
     GLOBALS["sample_rate"] = args.sample_rate
     GLOBALS["hop_length"] = args.hop_length
+    GLOBALS["audio_root"] = args.audio_root
     GLOBALS["alignment_root"] = args.alignment_root
     GLOBALS["alignment_audio_root"] = args.alignment_audio_root
     GLOBALS["require_alignments"] = args.require_alignments
