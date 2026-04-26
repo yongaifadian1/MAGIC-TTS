@@ -167,18 +167,23 @@ bash scripts/run_finetune.sh \
 
 数据格式、checkpoint 初始化和训练参数说明见 [TRAINING.md](./TRAINING.md)。
 
-如果你只想先低成本跑通训练链路，可以先从 Hugging Face 下载 `public_eval` 风格 100 条 smoke split：
+当前建议对外发布的数据只包含原始音频。训练前请先使用原始 MAGIC-TTS / AcademiCodec 工程中的数据准备脚本，在本地生成 `raw.arrow` 和 `duration.json`，再把准备好的目录传给 `run_finetune.sh`。可参考的脚本包括：
+
+- `tools/f5tts_duration_ft/prepare_emilia_1nv_merged_worddur.py`
+- `tools/f5tts_duration_ft/prepare_emilia_1nv_mfa_shards.py`
+- `tools/f5tts_duration_ft/prepare_emilia_ttrack_mfa_shards.py`
+- `tools/f5tts_duration_ft/run_mfa_alignment_shard.py`
+
+如果你只想先低成本跑通训练链路，可以先从 Hugging Face 下载只含原始音频的 `public_eval` 100 条集合，再按同样流程在本地生成训练索引：
 
 - https://huggingface.co/datasets/maimai11/b150_official_test_100
 
 ```bash
 bash scripts/run_finetune.sh \
-  --dataset /path/to/b150_official_test_100 \
+  --dataset /path/to/prepared_b150_official_test_100 \
   --run-name smoke_eval100 \
   --max-updates 50
 ```
-
-它和训练集使用同样的数据格式，但用途是 smoke test，不建议作为正式实验训练集。
 
 ### 致谢
 
@@ -350,14 +355,25 @@ bash scripts/run_finetune.sh \
   --run-name b150_public_sft
 ```
 
-For a low-cost pipeline smoke test, you can first download the 100-sample
-`public_eval` split from Hugging Face:
+The recommended public release only contains raw audio. Before fine-tuning, use
+the data-preparation scripts from the original MAGIC-TTS / AcademiCodec
+training repository to generate `raw.arrow` and `duration.json` locally, then
+pass the prepared directory to `run_finetune.sh`. Relevant scripts include:
+
+- `tools/f5tts_duration_ft/prepare_emilia_1nv_merged_worddur.py`
+- `tools/f5tts_duration_ft/prepare_emilia_1nv_mfa_shards.py`
+- `tools/f5tts_duration_ft/prepare_emilia_ttrack_mfa_shards.py`
+- `tools/f5tts_duration_ft/run_mfa_alignment_shard.py`
+
+For a low-cost pipeline smoke test, first download the raw-audio 100-sample
+`public_eval` split from Hugging Face, then prepare it locally with the same
+scripts:
 
 - https://huggingface.co/datasets/maimai11/b150_official_test_100
 
 ```bash
 bash scripts/run_finetune.sh \
-  --dataset /path/to/b150_official_test_100 \
+  --dataset /path/to/prepared_b150_official_test_100 \
   --run-name smoke_eval100 \
   --max-updates 50
 ```

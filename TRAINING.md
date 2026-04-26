@@ -13,7 +13,13 @@ The default expected main training dataset location is:
 data/b150_public
 ```
 
-For a lightweight smoke-test split, download the released package from Hugging Face:
+The public release is expected to contain raw audio only. Before fine-tuning,
+prepare a local dataset directory with the original MAGIC-TTS / AcademiCodec
+data-preparation scripts, then point `run_finetune.sh` to that prepared
+directory.
+
+For a lightweight smoke-test split, first download the raw-audio release from
+Hugging Face:
 
 ```text
 https://huggingface.co/datasets/maimai11/b150_official_test_100
@@ -27,8 +33,9 @@ checkpoints/magictts_36k.pt
 
 ## Dataset Format
 
-The fine-tuning script expects the same prepared dataset format used by
-`duration_dataset.py` with `dataset_type=CustomDatasetPath`.
+The fine-tuning script expects a prepared local dataset generated from the raw
+audio release, using the same format consumed by `duration_dataset.py` with
+`dataset_type=CustomDatasetPath`.
 
 At minimum, your dataset directory should contain:
 
@@ -63,7 +70,9 @@ Optional fields:
 
 ## Recommended Public Split
 
-For the user-facing B@150 release, use:
+For the user-facing B@150 release, distribute raw audio only, then prepare the
+local fine-tuning dataset with the original MAGIC-TTS / AcademiCodec scripts.
+The resulting prepared train split should follow:
 
 ```text
 public_train = full_b150_high_confidence - official_b150_test_100
@@ -72,10 +81,18 @@ public_train = full_b150_high_confidence - official_b150_test_100
 This repository does not hardcode the held-out 100-sample list yet. Instead, it
 expects the released public dataset to already exclude that official test set.
 
-For user bring-up, a separate `public_eval` smoke split can be downloaded in the
-same format. That split is useful for verifying that data loading, checkpoint
-init, logging, and a short fine-tune run all work end to end, but it should not
-be treated as the main public training split.
+For user bring-up, a separate `public_eval` smoke split can be downloaded as
+raw audio and prepared locally with the same scripts. That split is useful for
+verifying that data loading, checkpoint init, logging, and a short fine-tune
+run all work end to end, but it should not be treated as the main public
+training split.
+
+Relevant preparation scripts in the original training repository include:
+
+- `tools/f5tts_duration_ft/prepare_emilia_1nv_merged_worddur.py`
+- `tools/f5tts_duration_ft/prepare_emilia_1nv_mfa_shards.py`
+- `tools/f5tts_duration_ft/prepare_emilia_ttrack_mfa_shards.py`
+- `tools/f5tts_duration_ft/run_mfa_alignment_shard.py`
 
 ## Setup
 
@@ -103,7 +120,7 @@ Smoke-test example:
 
 ```bash
 bash scripts/run_finetune.sh \
-  --dataset /path/to/b150_official_test_100 \
+  --dataset /path/to/prepared_b150_official_test_100 \
   --run-name smoke_eval100 \
   --max-updates 50 \
   --save-updates 50 \
