@@ -146,15 +146,10 @@ python inference/align_prompt_with_mfa.py \
 
 ### 本地 Fine-Tune
 
-如果希望训练，需要额外安装训练依赖：
+如果希望训练，先额外安装训练依赖：
 
 ```bash
-python -m pip install \
-  "accelerate==1.12.0" \
-  "datasets==3.6.0" \
-  "tensorboard==2.20.0" \
-  "wandb==0.20.1" \
-  "ema-pytorch==0.7.7"
+python -m pip install -e ".[train]"
 ```
 
 默认会从 `checkpoints/magictts_36k.pt` 初始化。
@@ -167,12 +162,22 @@ bash scripts/run_finetune.sh \
 
 数据格式、checkpoint 初始化和训练参数说明见 [TRAINING.md](./TRAINING.md)。
 
-当前建议对外发布的数据只包含原始音频。训练前请先使用原始 MAGIC-TTS / AcademiCodec 工程中的数据准备脚本，在本地生成 `raw.arrow` 和 `duration.json`，再把准备好的目录传给 `run_finetune.sh`。可参考的脚本包括：
+当前建议对外发布的数据只包含原始音频。这个 beta 仓库已经附带数据准备脚本，可以在本地生成 `raw.arrow` 和 `duration.json`：
 
 - `tools/f5tts_duration_ft/prepare_emilia_1nv_merged_worddur.py`
 - `tools/f5tts_duration_ft/prepare_emilia_1nv_mfa_shards.py`
 - `tools/f5tts_duration_ft/prepare_emilia_ttrack_mfa_shards.py`
 - `tools/f5tts_duration_ft/run_mfa_alignment_shard.py`
+
+如果你的数据清单是 `audio_path + text` 的 JSONL，可以直接使用仓库内封装好的三步 wrapper：
+
+```bash
+bash scripts/prepare_finetune_dataset.sh \
+  --input-jsonl /path/to/manifest.jsonl \
+  --text-field text \
+  --audio-root /path/to/raw_audio_root \
+  --output-dir data/b150_public
+```
 
 如果你只想先低成本跑通训练链路，可以先从 Hugging Face 下载只含原始音频的 `public_eval` 100 条集合，再按同样流程在本地生成训练索引：
 
@@ -339,12 +344,7 @@ If you want to fine-tune locally, install the extra training dependencies
 first:
 
 ```bash
-python -m pip install \
-  "accelerate==1.12.0" \
-  "datasets==3.6.0" \
-  "tensorboard==2.20.0" \
-  "wandb==0.20.1" \
-  "ema-pytorch==0.7.7"
+python -m pip install -e ".[train]"
 ```
 
 Fine-tuning now defaults to initializing from `checkpoints/magictts_36k.pt`.
@@ -355,15 +355,25 @@ bash scripts/run_finetune.sh \
   --run-name b150_public_sft
 ```
 
-The recommended public release only contains raw audio. Before fine-tuning, use
-the data-preparation scripts from the original MAGIC-TTS / AcademiCodec
-training repository to generate `raw.arrow` and `duration.json` locally, then
-pass the prepared directory to `run_finetune.sh`. Relevant scripts include:
+The recommended public release only contains raw audio. This beta repository
+now includes the data-preparation scripts needed to generate `raw.arrow` and
+`duration.json` locally before fine-tuning. Relevant scripts include:
 
 - `tools/f5tts_duration_ft/prepare_emilia_1nv_merged_worddur.py`
 - `tools/f5tts_duration_ft/prepare_emilia_1nv_mfa_shards.py`
 - `tools/f5tts_duration_ft/prepare_emilia_ttrack_mfa_shards.py`
 - `tools/f5tts_duration_ft/run_mfa_alignment_shard.py`
+
+If your release already provides an `audio_path + text` JSONL manifest, you can
+run the bundled wrapper directly:
+
+```bash
+bash scripts/prepare_finetune_dataset.sh \
+  --input-jsonl /path/to/manifest.jsonl \
+  --text-field text \
+  --audio-root /path/to/raw_audio_root \
+  --output-dir data/b150_public
+```
 
 For a low-cost pipeline smoke test, first download the raw-audio 100-sample
 `public_eval` split from Hugging Face, then prepare it locally with the same

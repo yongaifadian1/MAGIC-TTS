@@ -18,9 +18,6 @@ classifiers = [
   "Topic :: Multimedia :: Sound/Audio :: Speech",
 ]
 dependencies = [
-  "accelerate",
-  "datasets",
-  "ema-pytorch",
   "einops",
   "huggingface_hub",
   "jieba",
@@ -31,13 +28,20 @@ dependencies = [
   "pypinyin",
   "safetensors",
   "soundfile",
-  "tensorboard",
   "torchdiffeq",
   "tqdm",
   "transformers<5",
   "vocos",
-  "wandb",
   "x-transformers",
+]
+
+[project.optional-dependencies]
+train = [
+  "accelerate==1.12.0",
+  "datasets==3.6.0",
+  "ema-pytorch==0.7.7",
+  "tensorboard==2.20.0",
+  "wandb==0.20.1",
 ]
 
 [tool.setuptools]

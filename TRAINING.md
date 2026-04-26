@@ -14,9 +14,8 @@ data/b150_public
 ```
 
 The public release is expected to contain raw audio only. Before fine-tuning,
-prepare a local dataset directory with the original MAGIC-TTS / AcademiCodec
-data-preparation scripts, then point `run_finetune.sh` to that prepared
-directory.
+prepare a local dataset directory with the bundled data-preparation scripts in
+this repository, then point `run_finetune.sh` to that prepared directory.
 
 For a lightweight smoke-test split, first download the raw-audio release from
 Hugging Face:
@@ -54,7 +53,7 @@ data/b150_public/
 ```
 
 If you use `raw.arrow`, store absolute file paths in each row's `audio_path`
-field. This matches the original MAGIC-TTS training recipe.
+field.
 
 `duration.json` must contain a `duration` array aligned with the dataset rows.
 Each row should include:
@@ -68,31 +67,32 @@ Optional fields:
 
 - `raw_text`
 
-## Recommended Public Split
+## Dataset Preparation
 
-For the user-facing B@150 release, distribute raw audio only, then prepare the
-local fine-tuning dataset with the original MAGIC-TTS / AcademiCodec scripts.
-The resulting prepared train split should follow:
-
-```text
-public_train = full_b150_high_confidence - official_b150_test_100
-```
-
-This repository does not hardcode the held-out 100-sample list yet. Instead, it
-expects the released public dataset to already exclude that official test set.
-
-For user bring-up, a separate `public_eval` smoke split can be downloaded as
-raw audio and prepared locally with the same scripts. That split is useful for
-verifying that data loading, checkpoint init, logging, and a short fine-tune
-run all work end to end, but it should not be treated as the main public
-training split.
-
-Relevant preparation scripts in the original training repository include:
+Relevant preparation scripts bundled in this repository include:
 
 - `tools/f5tts_duration_ft/prepare_emilia_1nv_merged_worddur.py`
 - `tools/f5tts_duration_ft/prepare_emilia_1nv_mfa_shards.py`
 - `tools/f5tts_duration_ft/prepare_emilia_ttrack_mfa_shards.py`
 - `tools/f5tts_duration_ft/run_mfa_alignment_shard.py`
+
+If your release already provides an `audio_path + text` JSONL manifest, the
+recommended path is:
+
+```bash
+bash scripts/prepare_finetune_dataset.sh \
+  --input-jsonl /path/to/manifest.jsonl \
+  --text-field text \
+  --audio-root /path/to/raw_audio_root \
+  --output-dir data/b150_public
+```
+
+For a lightweight smoke-test split, you can still download the 100-sample raw
+audio release from Hugging Face and prepare it locally with the same flow:
+
+```text
+https://huggingface.co/datasets/maimai11/b150_official_test_100
+```
 
 ## Setup
 
