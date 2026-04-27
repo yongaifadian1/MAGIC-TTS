@@ -47,10 +47,12 @@ def run(cmd: list[str], *, env: dict[str, str] | None = None, cwd: Path | None =
     subprocess.run(cmd, cwd=str(cwd) if cwd else None, env=env, check=True)
 
 
-def mfa_env(runtime_root: Path) -> dict[str, str]:
+def mfa_env(runtime_root: Path, mfa_bin_path: str) -> dict[str, str]:
     env = os.environ.copy()
     env["MFA_ROOT_DIR"] = str(runtime_root)
     env["PKUSEG_HOME"] = str(MFA_ROOT / "pkuseg")
+    mfa_bin_dir = str(Path(mfa_bin_path).resolve().parent)
+    env["PATH"] = f"{mfa_bin_dir}:{env.get('PATH', '')}"
     return env
 
 
@@ -133,6 +135,7 @@ def main():
 
     language = select_language(records)
     model_info = LANGUAGE_MODELS[language]
+    mfa_bin_path = resolve_mfa_bin()
 
     todo_records = []
     missing_audio = 0
@@ -196,7 +199,7 @@ def main():
         runtime_root.mkdir(parents=True, exist_ok=True)
         run(
             [
-                resolve_mfa_bin(),
+                mfa_bin_path,
                 "align",
                 str(corpus_dir),
                 str(model_info["dictionary"]),
@@ -211,7 +214,7 @@ def main():
                 "-t",
                 str(temp_dir),
             ],
-            env=mfa_env(runtime_root),
+            env=mfa_env(runtime_root, mfa_bin_path),
             cwd=shard_work_dir,
         )
 
