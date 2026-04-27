@@ -152,14 +152,6 @@ python inference/align_prompt_with_mfa.py \
 python -m pip install -e ".[train]"
 ```
 
-默认会从 `checkpoints/magictts_36k.pt` 初始化。
-
-```bash
-bash scripts/run_finetune.sh \
-  --dataset data/b150_public \
-  --run-name b150_public_sft
-```
-
 数据格式、checkpoint 初始化和训练参数说明见 [TRAINING.md](./TRAINING.md)。
 
 如果你想先用一个很小的真实例子跑通完整链路，可以先下载 Hugging Face 上的 `b150_official_test_100`，然后用仓库内的 wrapper 在本地生成 `prepared dataset`：
@@ -345,14 +337,6 @@ first:
 
 ```bash
 python -m pip install -e ".[train]"
-```
-
-Fine-tuning now defaults to initializing from `checkpoints/magictts_36k.pt`.
-
-```bash
-bash scripts/run_finetune.sh \
-  --dataset data/b150_public \
-  --run-name b150_public_sft
 ```
 
 For a concrete end-to-end example, first download the `b150_official_test_100`
