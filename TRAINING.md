@@ -69,30 +69,31 @@ Optional fields:
 
 ## Dataset Preparation
 
-Relevant preparation scripts bundled in this repository include:
-
-- `tools/f5tts_duration_ft/prepare_emilia_1nv_merged_worddur.py`
-- `tools/f5tts_duration_ft/prepare_emilia_1nv_mfa_shards.py`
-- `tools/f5tts_duration_ft/prepare_emilia_ttrack_mfa_shards.py`
-- `tools/f5tts_duration_ft/run_mfa_alignment_shard.py`
-
-If your release already provides an `audio_path + text` JSONL manifest, the
-recommended path is:
-
-```bash
-bash scripts/prepare_finetune_dataset.sh \
-  --input-jsonl /path/to/manifest.jsonl \
-  --text-field text \
-  --audio-root /path/to/raw_audio_root \
-  --output-dir data/b150_public
-```
-
-For a lightweight smoke-test split, you can still download the 100-sample raw
-audio release from Hugging Face and prepare it locally with the same flow:
+For a concrete end-to-end example, first download the
+`b150_official_test_100` smoke split from Hugging Face:
 
 ```text
 https://huggingface.co/datasets/maimai11/b150_official_test_100
 ```
+
+Assume the dataset is available locally at
+`/path/to/b150_official_test_100`, with:
+
+- `selected_samples.exported.jsonl`
+- `raw/audio/...`
+
+Then prepare a local training-ready dataset with:
+
+```bash
+bash scripts/prepare_finetune_dataset.sh \
+  --input-jsonl /path/to/b150_official_test_100/selected_samples.exported.jsonl \
+  --text-field target_text \
+  --audio-root /path/to/b150_official_test_100/raw \
+  --output-dir data/smoke_eval100_prepared
+```
+
+This produces a prepared dataset under `data/smoke_eval100_prepared`
+containing `raw.arrow`, `duration.json`, and `vocab.txt`.
 
 ## Setup
 
@@ -120,7 +121,7 @@ Smoke-test example:
 
 ```bash
 bash scripts/run_finetune.sh \
-  --dataset /path/to/prepared_b150_official_test_100 \
+  --dataset data/smoke_eval100_prepared \
   --run-name smoke_eval100 \
   --max-updates 50 \
   --save-updates 50 \
