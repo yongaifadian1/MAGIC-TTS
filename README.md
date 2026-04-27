@@ -152,8 +152,6 @@ python inference/align_prompt_with_mfa.py \
 python -m pip install -e ".[train]"
 ```
 
-数据格式、checkpoint 初始化和训练参数说明见 [TRAINING.md](./TRAINING.md)。
-
 如果你想先用一个很小的真实例子跑通完整链路，可以先下载 Hugging Face 上的 `b150_official_test_100`，然后用仓库内的 wrapper 在本地生成 `prepared dataset`：
 
 - https://huggingface.co/datasets/maimai11/b150_official_test_100
@@ -368,8 +366,6 @@ bash scripts/run_finetune.sh \
   --run-name smoke_eval100 \
   --max-updates 50
 ```
-
-See [TRAINING.md](./TRAINING.md) for dataset format and fine-tuning details.
 
 ### Acknowledgement
 
