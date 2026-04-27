@@ -51,7 +51,7 @@ def parse_args():
     parser.add_argument("--tokenizer-path", default=str(DEFAULT_TOKENIZER))
     parser.add_argument("--sample-vocoder-path", default=str(DEFAULT_VOCODER))
     parser.add_argument("--logger", default="tensorboard", choices=["tensorboard", "wandb", "none"])
-    parser.add_argument("--epochs", type=int, default=1)
+    parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--max-updates", type=int, default=0)
     parser.add_argument("--lr", type=float, default=7.5e-5)
     parser.add_argument("--batch-size", type=int, default=30000)
@@ -68,7 +68,7 @@ def parse_args():
     parser.add_argument("--prompt-text-mask-prob", type=float, default=0.0)
     parser.add_argument("--prompt-text-target-only-prob", type=float, default=0.0)
     parser.add_argument("--prompt-text-mask-token", default="")
-    parser.add_argument("--lr-decay-updates", type=int, default=0)
+    parser.add_argument("--lr-decay-updates", type=int, default=1000000)
     parser.add_argument("--reset-train-state", action="store_true")
     return parser.parse_args()
 
