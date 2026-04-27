@@ -168,7 +168,6 @@ python -m pip install -e ".[train]"
 ```bash
 bash scripts/prepare_finetune_dataset.sh \
   --input-jsonl /path/to/b150_official_test_100/selected_samples.exported.jsonl \
-  --text-field target_text \
   --audio-root /path/to/b150_official_test_100/raw \
   --output-dir data/smoke_eval100_prepared
 ```
@@ -355,7 +354,6 @@ Prepare a local training-ready dataset with the bundled wrapper:
 ```bash
 bash scripts/prepare_finetune_dataset.sh \
   --input-jsonl /path/to/b150_official_test_100/selected_samples.exported.jsonl \
-  --text-field target_text \
   --audio-root /path/to/b150_official_test_100/raw \
   --output-dir data/smoke_eval100_prepared
 ```

@@ -12,17 +12,16 @@ usage() {
 Usage:
   bash scripts/prepare_finetune_dataset.sh \
     --input-jsonl /path/to/manifest.jsonl \
-    --text-field text \
     --audio-root /path/to/raw_audio_root \
     --output-dir data/b150_public
 
 Required:
   --input-jsonl PATH [PATH ...]
-  --text-field FIELD
   --audio-root PATH
   --output-dir PATH
 
 Optional:
+  --text-field FIELD
   --sidecar-root PATH
   --shard-root PATH
   --num-jobs N
@@ -33,7 +32,7 @@ EOF
 }
 
 INPUT_JSONL=()
-TEXT_FIELD=""
+TEXT_FIELD="${MAGICTTS_TEXT_FIELD:-target_text}"
 AUDIO_ROOT=""
 OUTPUT_DIR=""
 SIDECAR_ROOT=""
@@ -99,7 +98,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ ${#INPUT_JSONL[@]} -eq 0 || -z "$TEXT_FIELD" || -z "$AUDIO_ROOT" || -z "$OUTPUT_DIR" ]]; then
+if [[ ${#INPUT_JSONL[@]} -eq 0 || -z "$AUDIO_ROOT" || -z "$OUTPUT_DIR" ]]; then
   usage >&2
   exit 1
 fi

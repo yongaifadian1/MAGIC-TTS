@@ -87,7 +87,6 @@ Then prepare a local training-ready dataset with:
 ```bash
 bash scripts/prepare_finetune_dataset.sh \
   --input-jsonl /path/to/b150_official_test_100/selected_samples.exported.jsonl \
-  --text-field target_text \
   --audio-root /path/to/b150_official_test_100/raw \
   --output-dir data/smoke_eval100_prepared
 ```
