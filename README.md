@@ -10,6 +10,7 @@
   <a href="https://www.python.org/downloads/release/python-3100/"><img src="https://img.shields.io/badge/Python-3.10-4c1?style=flat-square" alt="Python 3.10"></a>
   <a href="https://arxiv.org/abs/2604.21164"><img src="https://img.shields.io/badge/arXiv-2604.21164-b31b1b?style=flat-square&logo=arxiv&logoColor=white" alt="arXiv 2604.21164"></a>
   <a href="https://huggingface.co/maimai11/MAGIC-TTS"><img src="https://img.shields.io/badge/Hugging%20Face-MAGIC--TTS-ffbf00?style=flat-square" alt="Hugging Face"></a>
+  <a href="https://huggingface.co/datasets/maimai11/b150_official_train"><img src="https://img.shields.io/badge/HF%20Dataset-b150%20train-f0c419?style=flat-square" alt="HF dataset"></a>
   <a href="https://yongaifadian1.github.io/MAGIC-TTS/"><img src="https://img.shields.io/badge/Demo%20page-Online-f28c38?style=flat-square" alt="Demo page"></a>
 </p>
 <p align="center">
@@ -20,14 +21,15 @@
 
 - [2026-04-25] Inference release: code, pretrained checkpoint support, and online demos. 🚀
 - [2026-04-28] Training release: local fine-tuning pipeline with dataset preparation scripts. 🛠️
-- [Coming Soon] High-confidence public dataset release. 📦
+- [2026-04-28] Dataset release: high-confidence public training split with standalone MFA word alignments. 📦
 
 中文 | [English](#english)
 
 ## 中文
 
 - 在线 Demo: https://yongaifadian1.github.io/MAGIC-TTS/
-- Hugging Face: https://huggingface.co/maimai11/MAGIC-TTS
+- Hugging Face 模型: https://huggingface.co/maimai11/MAGIC-TTS
+- Hugging Face 训练集: https://huggingface.co/datasets/maimai11/b150_official_train
 - arXiv 论文: https://arxiv.org/abs/2604.21164
 
 MAGIC-TTS 是一个支持细粒度局部时序控制的语音合成系统。它既可以对指定 token 的内容时长和停顿进行毫秒级控制，也可以在不提供任何显式时长的情况下自然生成语音。
@@ -158,6 +160,12 @@ python inference/align_prompt_with_mfa.py \
 python -m pip install -e ".[train]"
 ```
 
+完整训练数据已经公开在 Hugging Face：
+
+- https://huggingface.co/datasets/maimai11/b150_official_train
+
+这个训练集提供了高置信度 `b150` 训练划分、分片 raw audio，以及独立打包的 MFA 逐词对齐标注。也就是说，整套训练集的 MFA 已经提前做好；如果你把这些 `mfa_sidecars` 解压到仓库里的 `data/prompt_sidecars/`，本地准备 `prepared dataset` 时可以直接复用这些现成对齐结果，而不需要重新对全量训练集跑一遍 MFA。
+
 如果你想先用一个很小的真实例子跑通完整链路，可以先下载 Hugging Face 上的 `b150_official_test_100`，然后用仓库内的 wrapper 在本地生成 `prepared dataset`：
 
 - https://huggingface.co/datasets/maimai11/b150_official_test_100
@@ -210,7 +218,8 @@ MAGIC-TTS 使用了 F5-TTS 提供的 backbone 实现，并以其公开 checkpoin
 ## English
 
 - Online demo: https://yongaifadian1.github.io/MAGIC-TTS/
-- Hugging Face: https://huggingface.co/maimai11/MAGIC-TTS
+- Hugging Face model: https://huggingface.co/maimai11/MAGIC-TTS
+- Hugging Face training dataset: https://huggingface.co/datasets/maimai11/b150_official_train
 - arXiv paper: https://arxiv.org/abs/2604.21164
 
 MAGIC-TTS is a speech synthesis system with explicit fine-grained local timing control. It supports millisecond-level control over selected token durations and pauses, and it can also generate speech naturally without any explicit duration input.
@@ -341,6 +350,12 @@ first:
 ```bash
 python -m pip install -e ".[train]"
 ```
+
+The full high-confidence training split is now public on Hugging Face:
+
+- https://huggingface.co/datasets/maimai11/b150_official_train
+
+This dataset includes the `b150` train split, split raw-audio bundles, and standalone MFA word-level alignments. In other words, the MFA pass for the full training release has already been prepared; if you unpack those `mfa_sidecars` under `data/prompt_sidecars/` inside this repository, the local preparation wrapper can reuse the existing alignments instead of rerunning MFA over the whole dataset.
 
 For a concrete end-to-end example, first download the `b150_official_test_100`
 smoke split from Hugging Face:
