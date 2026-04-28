@@ -18,9 +18,9 @@
 
 ## News
 
-- [2026-04-25] Released inference code, pretrained checkpoint support, and online demos.
-- [2026-04-28] Released local fine-tuning pipeline with dataset preparation scripts.
-- [Coming Soon] High-confidence public dataset release.
+- [2026-04-25] Inference release: code, pretrained checkpoint support, and online demos. 🚀
+- [2026-04-28] Training release: local fine-tuning pipeline with dataset preparation scripts. 🛠️
+- [Coming Soon] High-confidence public dataset release. 📦
 
 中文 | [English](#english)
 
